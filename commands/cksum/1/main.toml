@@ -9,7 +9,7 @@ version_commands = [["-V"]]
 
 [[command.version_preprocessors]]
 engine = "regex"
-pattern = "^cksum (uutils coreutils) (?P<version>[^[:space:]]+).*$"
+pattern = "^cksum \\(uutils coreutils\\) (?P<version>[^[:space:]]+).*$"
 replace = "$version"
 
 [[command.options]]
