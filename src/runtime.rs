@@ -1,12 +1,11 @@
 use std::collections::{BTreeMap, HashMap};
-use std::path::PathBuf;
 
 use anyhow::{Result, anyhow, bail};
 use clap::builder::{PossibleValue, PossibleValuesParser};
 use clap::{Arg, ArgAction, Command, ValueHint};
 use clap_complete::engine::{
-    ArgValueCandidates, ArgValueCompleter, CompletionCandidate, PathCompleter,
-    SubcommandCandidates, ValueCompleter,
+    ArgValueCandidates, ArgValueCompleter, CompletionCandidate, SubcommandCandidates,
+    ValueCompleter,
 };
 
 use crate::database::{
@@ -362,8 +361,13 @@ fn apply_common_arg_fields(
     if !value_names.is_empty() {
         argument = argument.value_names(value_names.iter().cloned());
     }
+    let parsed_value_hint = parse_value_hint(value_hint)?;
+    // Let the shell's native file completer handle paths, including quoting
+    // and platform-specific path syntax.
+    if !is_shell_native_path_hint(parsed_value_hint) {
+        argument = argument.value_hint(parsed_value_hint);
+    }
     argument = argument
-        .value_hint(parse_value_hint(value_hint)?)
         .required(required)
         .global(global)
         .hide(hidden)
@@ -453,10 +457,15 @@ fn apply_value_completion(
                     .map(|value| candidate_data_from_value(value))
                     .collect(),
             ),
-            "path" => CompletionSource::Path(path_completer(completer)?),
+            // File-system completion is delegated to the shell so that it can
+            // apply its native quoting and path rules.
+            "path" => continue,
             other => bail!("unknown completer kind `{other}`"),
         };
         sources.insert(index, source);
+    }
+    if sources.is_empty() {
+        return Ok(argument);
     }
     argument = argument.add(ArgValueCompleter::new(IndexedCompleter { sources }));
     Ok(argument)
@@ -464,7 +473,6 @@ fn apply_value_completion(
 
 enum CompletionSource {
     Candidates(Vec<CandidateData>),
-    Path(PathCompleter),
 }
 
 struct IndexedCompleter {
@@ -472,17 +480,20 @@ struct IndexedCompleter {
 }
 
 impl ValueCompleter for IndexedCompleter {
-    fn complete(&self, current: &std::ffi::OsStr) -> Vec<CompletionCandidate> {
+    fn complete(&self, _current: &std::ffi::OsStr) -> Vec<CompletionCandidate> {
         match self.sources.get(&-1) {
             Some(CompletionSource::Candidates(candidates)) => {
                 candidates.iter().map(candidate_value).collect()
             }
-            Some(CompletionSource::Path(path)) => path.complete(current),
             None => Vec::new(),
         }
     }
 
-    fn complete_at(&self, arg_index: usize, current: &std::ffi::OsStr) -> Vec<CompletionCandidate> {
+    fn complete_at(
+        &self,
+        arg_index: usize,
+        _current: &std::ffi::OsStr,
+    ) -> Vec<CompletionCandidate> {
         let source = self
             .sources
             .get(&(arg_index as i64))
@@ -491,27 +502,9 @@ impl ValueCompleter for IndexedCompleter {
             Some(CompletionSource::Candidates(candidates)) => {
                 candidates.iter().map(candidate_value).collect()
             }
-            Some(CompletionSource::Path(path)) => path.complete(current),
             None => Vec::new(),
         }
     }
-}
-
-fn path_completer(row: &CompleterRow) -> Result<PathCompleter> {
-    let mut completer = match row.path_kind.as_deref() {
-        Some("any") => PathCompleter::any(),
-        Some("file") => PathCompleter::file(),
-        Some("dir") => PathCompleter::dir(),
-        Some(other) => bail!("unknown path completer kind `{other}`"),
-        None => bail!("path completer is missing path_kind"),
-    };
-    if row.path_stdio {
-        completer = completer.stdio();
-    }
-    if let Some(current_dir) = &row.path_current_dir {
-        completer = completer.current_dir(PathBuf::from(current_dir));
-    }
-    Ok(completer)
 }
 
 #[derive(Clone)]
@@ -617,6 +610,13 @@ fn parse_value_hint(value: &str) -> Result<ValueHint> {
         "email_address" => ValueHint::EmailAddress,
         other => bail!("unknown value_hint `{other}`"),
     })
+}
+
+fn is_shell_native_path_hint(value_hint: ValueHint) -> bool {
+    matches!(
+        value_hint,
+        ValueHint::AnyPath | ValueHint::FilePath | ValueHint::DirPath | ValueHint::ExecutablePath
+    )
 }
 
 fn one_char(value: &str, field: &str) -> Result<char> {

@@ -4,6 +4,7 @@ use std::fs;
 use apophenia::builder::build_database;
 use apophenia::database::Database;
 use apophenia::runtime::build_command;
+use clap::ValueHint;
 
 #[tokio::test]
 async fn builds_sqlite_and_restores_dynamic_completion_model() {
@@ -123,6 +124,12 @@ action = "flag"
     assert_eq!(verbose.get_short(), Some('v'));
     assert_eq!(verbose.get_long(), Some("verbose"));
 
+    let input = command
+        .get_arguments()
+        .find(|argument| argument.get_id() == "input")
+        .expect("input argument");
+    assert_eq!(input.get_value_hint(), ValueHint::Unknown);
+
     let root = complete(&mut command, ["demo", ""], 1);
     assert_contains(&root, "--mode");
     assert_contains(&root, "--verbose");
@@ -145,6 +152,12 @@ action = "flag"
     let second_remote = complete(&mut command, ["demo", "--remote", "origin", ""], 3);
     assert_contains(&second_remote, "main");
     assert_contains(&second_remote, "develop");
+
+    let native_path = complete(&mut command, ["demo", "--path", ""], 2);
+    assert!(
+        native_path.is_empty(),
+        "path candidates must be supplied by the shell: {native_path:?}"
+    );
 }
 
 fn complete<const N: usize>(
