@@ -1,0 +1,132 @@
+schema_version = 1
+
+[command]
+name = "cksum"
+binary = "cksum"
+description = "Print CRC and size for each file"
+supported_versions = ["0.10.0"]
+version_commands = [["-V"]]
+
+[[command.version_preprocessors]]
+engine = "regex"
+pattern = "^cksum (uutils coreutils) (?P<version>[^[:space:]]+).*$"
+replace = "$version"
+
+[[command.options]]
+id = "algorithm"
+names = ["-a", "--algorithm"]
+action = "value"
+value_name = "ALGORITHM"
+help = "select the digest type to use. See DIGEST below"
+possible_values = [
+  "sysv",
+  "bsd",
+  "crc",
+  "crc32b",
+  "md5",
+  "sha1",
+  "sha2",
+  "sha3",
+  "blake2b",
+  "sm3",
+  "sha224",
+  "sha256",
+  "sha384",
+  "sha512",
+  "blake3",
+  "shake128",
+  "shake256",
+]
+
+[[command.options]]
+id = "untagged"
+names = ["--untagged"]
+action = "flag"
+help = "create a reversed style checksum, without digest type"
+
+[[command.options]]
+id = "tag"
+names = ["--tag"]
+action = "flag"
+help = "create a BSD style checksum (default)"
+
+[[command.options]]
+id = "length"
+names = ["-l", "--length"]
+action = "value"
+value_name = "length"
+help = "digest length in bits"
+
+[[command.options]]
+id = "raw"
+names = ["--raw"]
+action = "flag"
+help = "emit a raw binary digest, not hexadecimal"
+
+[[command.options]]
+id = "check"
+names = ["-c", "--check"]
+action = "flag"
+help = "read checksums from the FILEs and check them"
+
+[[command.options]]
+id = "warn"
+names = ["-w", "--warn"]
+action = "flag"
+help = "warn about improperly formatted checksum lines"
+
+[[command.options]]
+id = "status"
+names = ["--status"]
+action = "flag"
+help = "don't output anything, status code shows success"
+
+[[command.options]]
+id = "quiet"
+names = ["--quiet"]
+action = "flag"
+help = "don't print OK for each successfully verified file"
+
+[[command.options]]
+id = "ignore_missing"
+names = ["--ignore-missing"]
+action = "flag"
+help = "don't fail or report status for missing files"
+
+[[command.options]]
+id = "strict"
+names = ["--strict"]
+action = "flag"
+help = "exit non-zero for improperly formatted checksum lines"
+
+[[command.options]]
+id = "base64"
+names = ["--base64"]
+action = "flag"
+help = "emit base64-encoded digests, not hexadecimal"
+
+[[command.options]]
+id = "zero"
+names = ["-z", "--zero"]
+action = "flag"
+help = "end each output line with NUL, not newline, and disable file name escaping"
+
+[[command.options]]
+id = "debug"
+names = ["--debug"]
+action = "flag"
+help = "print CPU hardware capability detection info used by cksum"
+
+[[command.options]]
+id = "version"
+names = ["-V", "--version"]
+action = "flag"
+help = "Print version"
+
+[[command.arguments]]
+id = "file"
+position = 1
+value_name = "FILE"
+multiple = true
+value_hint = "any_path"
+help = "Files to process"
