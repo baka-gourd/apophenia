@@ -1,6 +1,7 @@
 use std::collections::{BTreeMap, HashMap};
 use std::path::{Path, PathBuf};
 use std::process::Command as ProcessCommand;
+use std::sync::OnceLock;
 
 #[cfg(unix)]
 use std::fs;
@@ -12,6 +13,7 @@ use clap_complete::env::{Bash, Elvish, EnvCompleter, Fish, Powershell, Zsh};
 use minijinja::{Environment, context};
 use regex::Regex;
 use semver::{Version, VersionReq};
+use sysinfo::{ProcessesToUpdate, System};
 
 use crate::database::{InstallVersion, SupportRule};
 use crate::{APP_SELECTOR_ENV, COMPLETION_ENV};
@@ -113,14 +115,14 @@ pub fn detect_installations(versions: &[InstallVersion]) -> Result<InstallReport
                 ));
                 continue;
             }
-            let ResolvedCommand::External(command) = availability else {
+            if let ResolvedCommand::ShellBuiltin = &availability {
                 report.skipped.push(format!(
                     "{}:{}: `{}` is a shell builtin and cannot be version-probed",
                     version.application_name, version.internal_version, version.binary_name
                 ));
                 continue;
-            };
-            match probe_version(version, &command) {
+            }
+            match probe_version(version, &availability) {
                 Ok(Some(detected)) => {
                     if let Some(specificity) = version
                         .rules
@@ -170,13 +172,14 @@ pub fn detect_installations(versions: &[InstallVersion]) -> Result<InstallReport
 #[derive(Clone, Debug)]
 enum ResolvedCommand {
     External(PathBuf),
+    PowerShellScript(PathBuf),
     ShellBuiltin,
 }
 
 fn resolve_command(binary: &str) -> Option<ResolvedCommand> {
     let binary_path = Path::new(binary);
     if binary_path.components().count() > 1 || binary_path.is_absolute() {
-        return is_executable(binary_path).then(|| ResolvedCommand::External(binary_path.into()));
+        return is_executable(binary_path).then(|| resolved_command(binary_path.to_owned()));
     }
 
     for directory in std::env::var_os("PATH")
@@ -185,7 +188,7 @@ fn resolve_command(binary: &str) -> Option<ResolvedCommand> {
     {
         for candidate in executable_candidates(&directory, binary) {
             if is_executable(&candidate) {
-                return Some(ResolvedCommand::External(candidate));
+                return Some(resolved_command(candidate));
             }
         }
     }
@@ -197,21 +200,55 @@ fn resolve_command(binary: &str) -> Option<ResolvedCommand> {
     }
 }
 
+fn resolved_command(path: PathBuf) -> ResolvedCommand {
+    if path
+        .extension()
+        .is_some_and(|extension| extension.eq_ignore_ascii_case("ps1"))
+    {
+        return ResolvedCommand::PowerShellScript(path);
+    }
+    ResolvedCommand::External(path)
+}
+
 fn executable_candidates(directory: &Path, binary: &str) -> Vec<PathBuf> {
     let candidate = directory.join(binary);
-    let mut candidates = vec![candidate.clone()];
+    let has_extension = candidate.extension().is_some();
+    let mut candidates = vec![candidate];
+    if has_extension {
+        return candidates;
+    }
+
     #[cfg(windows)]
-    if candidate.extension().is_none() {
-        let extensions = std::env::var_os("PATHEXT")
+    {
+        let mut extensions = std::env::var_os("PATHEXT")
             .map(|value| value.to_string_lossy().into_owned())
             .unwrap_or_else(|| ".COM;.EXE;.BAT;.CMD".to_owned());
+        if !extensions
+            .split(';')
+            .any(|extension| extension.trim().eq_ignore_ascii_case(".PS1"))
+        {
+            if !extensions.is_empty() {
+                extensions.push(';');
+            }
+            extensions.push_str(".PS1");
+        }
         candidates.extend(
             extensions
                 .split(';')
+                .map(str::trim)
                 .filter(|extension| !extension.is_empty())
                 .map(|extension| directory.join(format!("{binary}{extension}"))),
         );
     }
+
+    if !candidates.iter().any(|candidate| {
+        candidate
+            .extension()
+            .is_some_and(|extension| extension.eq_ignore_ascii_case("ps1"))
+    }) {
+        candidates.push(directory.join(format!("{binary}.ps1")));
+    }
+
     candidates
 }
 
@@ -250,21 +287,22 @@ fn windows_builtin(_binary: &str) -> bool {
     false
 }
 
-fn probe_version(version: &InstallVersion, cli: &Path) -> Result<Option<String>> {
+fn probe_version(version: &InstallVersion, command: &ResolvedCommand) -> Result<Option<String>> {
     let mut errors = Vec::new();
     for argv in &version.version_commands {
-        let output = ProcessCommand::new(cli).args(argv).output();
+        let output =
+            process_for_command(command).and_then(|mut process| process.args(argv).output());
         let output = match output {
             Ok(output) => output,
             Err(error) => {
-                errors.push(format!("{} {:?}: {error}", cli.display(), argv));
+                errors.push(format!("{} {:?}: {error}", command_display(command), argv));
                 continue;
             }
         };
         if !output.status.success() {
             errors.push(format!(
                 "{} {:?} exited with {}",
-                cli.display(),
+                command_display(command),
                 argv,
                 output.status
             ));
@@ -288,6 +326,184 @@ fn probe_version(version: &InstallVersion, cli: &Path) -> Result<Option<String>>
         Ok(None)
     } else {
         Err(anyhow!(errors.join("; ")))
+    }
+}
+
+fn process_for_command(command: &ResolvedCommand) -> std::io::Result<ProcessCommand> {
+    match command {
+        ResolvedCommand::External(path) => Ok(ProcessCommand::new(path)),
+        ResolvedCommand::PowerShellScript(path) => {
+            let Some(host) = powershell_host() else {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::NotFound,
+                    "no supported PowerShell host was found",
+                ));
+            };
+            let mut process = ProcessCommand::new(&host.path);
+            process
+                .args(["-NoLogo", "-NoProfile", "-NonInteractive", "-File"])
+                .arg(path);
+            Ok(process)
+        }
+        ResolvedCommand::ShellBuiltin => {
+            unreachable!("shell builtins are not passed to version probing")
+        }
+    }
+}
+
+fn command_display(command: &ResolvedCommand) -> String {
+    match command {
+        ResolvedCommand::External(path) => path.display().to_string(),
+        ResolvedCommand::PowerShellScript(path) => {
+            if let Some(host) = powershell_host() {
+                format!(
+                    "{} (PowerShell {}) -File {}",
+                    host.path.display(),
+                    host.version,
+                    path.display()
+                )
+            } else {
+                format!("PowerShell -File {}", path.display())
+            }
+        }
+        ResolvedCommand::ShellBuiltin => "shell builtin".to_owned(),
+    }
+}
+
+#[derive(Clone, Debug)]
+struct PowerShellHost {
+    path: PathBuf,
+    version: String,
+}
+
+fn powershell_host() -> Option<&'static PowerShellHost> {
+    static HOST: OnceLock<Option<PowerShellHost>> = OnceLock::new();
+    HOST.get_or_init(discover_powershell_host).as_ref()
+}
+
+fn discover_powershell_host() -> Option<PowerShellHost> {
+    powershell_candidates()
+        .into_iter()
+        .filter_map(|path| {
+            let version = query_powershell_version(&path)?;
+            powershell_version_supported(&version).then_some(PowerShellHost { path, version })
+        })
+        .next()
+}
+
+fn powershell_candidates() -> Vec<PathBuf> {
+    let mut candidates = current_shell_powershell_candidates();
+    let names = powershell_program_names();
+    for directory in std::env::var_os("PATH")
+        .into_iter()
+        .flat_map(|value| std::env::split_paths(&value).collect::<Vec<_>>())
+    {
+        for name in names {
+            let path = directory.join(name);
+            if path.is_file() && !candidates.iter().any(|candidate| candidate == &path) {
+                candidates.push(path);
+            }
+        }
+    }
+    candidates
+}
+
+fn powershell_program_names() -> &'static [&'static str] {
+    #[cfg(windows)]
+    {
+        &["pwsh.exe", "powershell.exe", "pwsh", "powershell"]
+    }
+    #[cfg(not(windows))]
+    {
+        &["pwsh"]
+    }
+}
+
+fn current_shell_powershell_candidates() -> Vec<PathBuf> {
+    let Ok(current_pid) = sysinfo::get_current_pid() else {
+        return Vec::new();
+    };
+    let mut system = System::new();
+    system.refresh_processes(ProcessesToUpdate::All, true);
+
+    let Some(current_process) = system.process(current_pid) else {
+        return Vec::new();
+    };
+    let mut next_pid = current_process.parent();
+    let mut candidates = Vec::new();
+    while let Some(pid) = next_pid {
+        let Some(process) = system.process(pid) else {
+            break;
+        };
+        if is_powershell_process(process)
+            && let Some(path) = process.exe()
+            && !candidates.iter().any(|candidate| candidate == path)
+        {
+            candidates.push(path.to_owned());
+        }
+        next_pid = process.parent();
+    }
+    candidates
+}
+
+fn is_powershell_process(process: &sysinfo::Process) -> bool {
+    let name = process.exe().and_then(Path::file_stem).or_else(|| {
+        process
+            .name()
+            .to_str()
+            .map(Path::new)
+            .and_then(Path::file_stem)
+    });
+    name.is_some_and(|name| {
+        name.to_string_lossy().eq_ignore_ascii_case("pwsh")
+            || name.to_string_lossy().eq_ignore_ascii_case("powershell")
+    })
+}
+
+fn query_powershell_version(path: &Path) -> Option<String> {
+    let output = ProcessCommand::new(path)
+        .args([
+            "-NoLogo",
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "$PSVersionTable.PSVersion.ToString()",
+        ])
+        .output()
+        .ok()?;
+    if !output.status.success() {
+        return None;
+    }
+    String::from_utf8_lossy(&output.stdout)
+        .lines()
+        .find_map(parse_powershell_version)
+}
+
+fn parse_powershell_version(value: &str) -> Option<String> {
+    let value = value.trim();
+    let components = value.split('.').collect::<Vec<_>>();
+    if components.len() < 2
+        || components
+            .iter()
+            .any(|component| component.is_empty() || component.parse::<u64>().is_err())
+    {
+        return None;
+    }
+    Some(value.to_owned())
+}
+
+fn powershell_version_supported(version: &str) -> bool {
+    let Some(major) = version
+        .split('.')
+        .next()
+        .and_then(|value| value.parse::<u64>().ok())
+    else {
+        return false;
+    };
+    if cfg!(windows) {
+        major >= 5
+    } else {
+        major >= 6
     }
 }
 
@@ -549,6 +765,34 @@ mod tests {
             assert!(!script.starts_with("export APOPHENIA_APP"));
             assert!(!script.starts_with("set -gx APOPHENIA_APP"));
         }
+    }
+
+    #[test]
+    fn recognizes_powershell_script_shims() {
+        let candidates = super::executable_candidates(std::path::Path::new("tools"), "tool");
+        assert!(candidates.iter().any(|candidate| {
+            candidate
+                .file_name()
+                .and_then(|name| name.to_str())
+                .is_some_and(|name| name.eq_ignore_ascii_case("tool.ps1"))
+        }));
+
+        assert!(matches!(
+            super::resolved_command(std::path::PathBuf::from("tool.PS1")),
+            super::ResolvedCommand::PowerShellScript(_)
+        ));
+    }
+
+    #[test]
+    fn parses_both_power_shell_version_shapes() {
+        assert_eq!(
+            super::parse_powershell_version("7.6.5"),
+            Some("7.6.5".to_owned())
+        );
+        assert_eq!(
+            super::parse_powershell_version("5.1.26100.9223"),
+            Some("5.1.26100.9223".to_owned())
+        );
     }
 
     #[test]
