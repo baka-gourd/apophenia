@@ -1,0 +1,625 @@
+schema_version = 1
+
+[command]
+name = "flac"
+binary = "flac"
+description = "Free Lossless Audio Codec command-line encoder, decoder, tester, and analyzer"
+supported_versions = ["1.5.0"]
+version_commands = [["--version"]]
+disable_help_flag = true
+
+[[command.version_preprocessors]]
+engine = "regex"
+pattern = "(?m)^flac (?P<version>[^[:space:]]+).*$"
+replace = "$version"
+
+# General options
+[[command.options]]
+id = "version"
+names = ["-v", "--version"]
+action = "flag"
+help = "Show the flac version number, and quit."
+
+[[command.options]]
+id = "help"
+names = ["-h", "--help"]
+action = "help"
+help = "Show basic usage and a list of all options, and quit."
+
+[[command.options]]
+id = "decode"
+names = ["-d", "--decode"]
+action = "flag"
+help = "Decode (the default behavior is to encode)."
+
+[[command.options]]
+id = "test"
+names = ["-t", "--test"]
+action = "flag"
+help = "Test a flac encoded file without writing a decoded file."
+
+[[command.options]]
+id = "analyze"
+names = ["-a", "--analyze"]
+action = "flag"
+help = "Analyze a FLAC encoded file."
+
+[[command.options]]
+id = "stdout"
+names = ["-c", "--stdout"]
+action = "flag"
+help = "Write output to stdout."
+
+[[command.options]]
+id = "force"
+names = ["-f", "--force"]
+action = "flag"
+help = "Force overwriting of output files."
+
+[[command.options]]
+id = "delete_input_file"
+names = ["--delete-input-file"]
+action = "flag"
+help = "Automatically delete the input file after a successful encode or decode."
+
+[[command.options]]
+id = "output_name"
+names = ["-o", "--output-name"]
+action = "value"
+value_name = "FILENAME"
+value_hint = "file_path"
+help = "Force the output file name."
+
+[[command.options]]
+id = "output_prefix"
+names = ["--output-prefix"]
+action = "value"
+value_name = "STRING"
+value_hint = "dir_path"
+help = "Prefix each output file name with the given string."
+
+[[command.options]]
+id = "preserve_modtime"
+names = ["--preserve-modtime"]
+action = "flag"
+help = "Preserve input timestamps and permissions on output files."
+
+[[command.options]]
+id = "keep_foreign_metadata"
+names = ["--keep-foreign-metadata"]
+action = "flag"
+help = "Save or restore WAVE, RF64, or AIFF non-audio chunks in FLAC metadata."
+
+[[command.options]]
+id = "keep_foreign_metadata_if_present"
+names = ["--keep-foreign-metadata-if-present"]
+action = "flag"
+help = "Save or restore foreign metadata when present without failing if it is absent."
+
+[[command.options]]
+id = "skip"
+names = ["--skip"]
+action = "value"
+value_name = "#|MM:SS"
+help = "Skip the first samples or initial time of each input."
+
+[[command.options]]
+id = "until"
+names = ["--until"]
+action = "value"
+value_name = "#|[+|-]MM:SS"
+allow_hyphen_values = true
+help = "Stop at the given sample number or time for each input file."
+
+[[command.options]]
+id = "no_utf8_convert"
+names = ["--no-utf8-convert"]
+action = "flag"
+help = "Do not convert tags from the local charset to UTF-8."
+
+[[command.options]]
+id = "silent"
+names = ["-s", "--silent"]
+action = "flag"
+help = "Do not write runtime encode/decode statistics to stderr."
+
+[[command.options]]
+id = "totally_silent"
+names = ["--totally-silent"]
+action = "flag"
+help = "Do not print anything of any kind, including warnings or errors."
+
+[[command.options]]
+id = "warnings_as_errors"
+names = ["-w", "--warnings-as-errors"]
+action = "flag"
+help = "Treat all warnings as errors."
+
+# Decoding options
+[[command.options]]
+id = "decode_through_errors"
+names = ["-F", "--decode-through-errors"]
+action = "flag"
+help = "Continue decoding through stream errors."
+
+[[command.options]]
+id = "cue"
+names = ["--cue"]
+action = "value"
+value_name = "[TRACK.INDEX][-TRACK.INDEX]"
+help = "Set the beginning and ending cuepoints to decode."
+
+[[command.options]]
+id = "decode_chained_stream"
+names = ["--decode-chained-stream"]
+action = "flag"
+help = "Decode all links in a chained Ogg stream."
+
+[[command.options]]
+id = "apply_replaygain"
+names = ["--apply-replaygain-which-is-not-lossless"]
+action = "value"
+value_name = "SPECIFICATION"
+default_missing_value = "0aLn1"
+require_equals = true
+help = "Apply ReplayGain values while decoding; this is not lossless."
+
+# Encoding options
+[[command.options]]
+id = "verify"
+names = ["-V", "--verify"]
+action = "flag"
+help = "Verify an encoding by decoding the output and comparing it to the original."
+
+[[command.options]]
+id = "compression_level_0"
+names = ["-0", "--compression-level-0", "--fast"]
+action = "flag"
+help = "Use the fastest compression preset."
+
+[[command.options]]
+id = "compression_level_1"
+names = ["-1", "--compression-level-1"]
+action = "flag"
+help = "Use compression preset 1."
+
+[[command.options]]
+id = "compression_level_2"
+names = ["-2", "--compression-level-2"]
+action = "flag"
+help = "Use compression preset 2."
+
+[[command.options]]
+id = "compression_level_3"
+names = ["-3", "--compression-level-3"]
+action = "flag"
+help = "Use compression preset 3."
+
+[[command.options]]
+id = "compression_level_4"
+names = ["-4", "--compression-level-4"]
+action = "flag"
+help = "Use compression preset 4."
+
+[[command.options]]
+id = "compression_level_5"
+names = ["-5", "--compression-level-5"]
+action = "flag"
+help = "Use compression preset 5."
+
+[[command.options]]
+id = "compression_level_6"
+names = ["-6", "--compression-level-6"]
+action = "flag"
+help = "Use compression preset 6."
+
+[[command.options]]
+id = "compression_level_7"
+names = ["-7", "--compression-level-7"]
+action = "flag"
+help = "Use compression preset 7."
+
+[[command.options]]
+id = "compression_level_8"
+names = ["-8", "--compression-level-8", "--best"]
+action = "flag"
+help = "Use the highest compression preset."
+
+[[command.options]]
+id = "max_lpc_order"
+names = ["-l", "--max-lpc-order"]
+action = "value"
+value_name = "#"
+help = "Specify the maximum LPC order."
+
+[[command.options]]
+id = "blocksize"
+names = ["-b", "--blocksize"]
+action = "value"
+value_name = "#"
+help = "Specify the blocksize in samples."
+
+[[command.options]]
+id = "mid_side"
+names = ["-m", "--mid-side"]
+action = "flag"
+help = "Try mid-side coding for each stereo frame."
+
+[[command.options]]
+id = "adaptive_mid_side"
+names = ["-M", "--adaptive-mid-side"]
+action = "flag"
+help = "Use adaptive mid-side coding for all stereo frames."
+
+[[command.options]]
+id = "rice_partition_order"
+names = ["-r", "--rice-partition-order"]
+action = "value"
+value_name = "[MIN,]MAX"
+help = "Set the minimum and maximum residual partition order."
+
+[[command.options]]
+id = "apodization"
+names = ["-A", "--apodization"]
+action = "value"
+value_name = "FUNCTION(S)"
+help = "Window audio data with the given apodization function or functions."
+
+[[command.options]]
+id = "exhaustive_model_search"
+names = ["-e", "--exhaustive-model-search"]
+action = "flag"
+help = "Do an exhaustive model search."
+
+[[command.options]]
+id = "qlp_coeff_precision"
+names = ["-q", "--qlp-coeff-precision"]
+action = "value"
+value_name = "#"
+help = "Set the precision of quantized linear-predictor coefficients."
+
+[[command.options]]
+id = "qlp_coeff_precision_search"
+names = ["-p", "--qlp-coeff-precision-search"]
+action = "flag"
+help = "Exhaustively search linear-predictor coefficient quantization."
+
+[[command.options]]
+id = "lax"
+names = ["--lax"]
+action = "flag"
+help = "Allow the encoder to generate non-Subset files."
+
+[[command.options]]
+id = "limit_min_bitrate"
+names = ["--limit-min-bitrate"]
+action = "flag"
+help = "Limit the minimum bitrate by disallowing constant-subframe frames."
+
+[[command.options]]
+id = "threads"
+names = ["-j", "--threads"]
+action = "value"
+value_name = "#"
+help = "Set the maximum number of encoding threads."
+
+[[command.options]]
+id = "ignore_chunk_sizes"
+names = ["--ignore-chunk-sizes"]
+action = "flag"
+help = "Ignore WAVE and AIFF file size headers."
+
+[[command.options]]
+id = "replay_gain"
+names = ["--replay-gain"]
+action = "flag"
+help = "Calculate ReplayGain values and store them as FLAC tags."
+
+[[command.options]]
+id = "cuesheet"
+names = ["--cuesheet"]
+action = "value"
+value_name = "FILENAME"
+value_hint = "file_path"
+help = "Import a cuesheet and store it in a CUESHEET metadata block."
+
+[[command.options]]
+id = "picture"
+names = ["--picture"]
+action = "value"
+value_name = "FILENAME|SPECIFICATION"
+multiple = true
+help = "Import a picture and store it in a PICTURE metadata block."
+
+[[command.options]]
+id = "tag"
+names = ["-T", "--tag"]
+action = "value"
+value_name = "FIELD=VALUE"
+multiple = true
+help = "Add a FLAC tag; may appear multiple times."
+
+[[command.options]]
+id = "tag_from_file"
+names = ["--tag-from-file"]
+action = "value"
+value_name = "FIELD=FILENAME"
+multiple = true
+help = "Add a FLAC tag whose value is read from a file."
+
+[[command.options]]
+id = "seekpoint"
+names = ["-S", "--seekpoint"]
+action = "value"
+value_name = "#|X|#x|#s"
+multiple = true
+help = "Add one or more seek points to the SEEKTABLE."
+
+[[command.options]]
+id = "padding"
+names = ["-P", "--padding"]
+action = "value"
+value_name = "#"
+help = "Write a PADDING metadata block of the given length in bytes."
+
+# Format options
+[[command.options]]
+id = "ogg"
+names = ["--ogg"]
+action = "flag"
+help = "Use the Ogg transport layer and output Ogg FLAC."
+
+[[command.options]]
+id = "serial_number"
+names = ["--serial-number"]
+action = "value"
+value_name = "#"
+help = "Set the serial number for the first Ogg FLAC stream."
+
+[[command.options]]
+id = "force_aiff_format"
+names = ["--force-aiff-format"]
+action = "flag"
+help = "Force decoded output to AIFF format."
+
+[[command.options]]
+id = "force_rf64_format"
+names = ["--force-rf64-format"]
+action = "flag"
+help = "Force decoded output to RF64 format."
+
+[[command.options]]
+id = "force_wave64_format"
+names = ["--force-wave64-format"]
+action = "flag"
+help = "Force decoded output to Wave64 format."
+
+[[command.options]]
+id = "force_legacy_wave_format"
+names = ["--force-legacy-wave-format"]
+action = "flag"
+help = "Force decoded output to legacy WAVE format."
+
+[[command.options]]
+id = "force_extensible_wave_format"
+names = ["--force-extensible-wave-format"]
+action = "flag"
+help = "Force decoded output to extensible WAVE format."
+
+[[command.options]]
+id = "force_aiff_c_none_format"
+names = ["--force-aiff-c-none-format"]
+action = "flag"
+help = "Force decoded output to AIFF-C with NONE format."
+
+[[command.options]]
+id = "force_aiff_c_sowt_format"
+names = ["--force-aiff-c-sowt-format"]
+action = "flag"
+help = "Force decoded output to AIFF-C with sowt format."
+
+[[command.options]]
+id = "force_raw_format"
+names = ["--force-raw-format"]
+action = "flag"
+help = "Force input or output to be treated as raw samples."
+
+[[command.options]]
+id = "sign"
+names = ["--sign"]
+action = "value"
+value_name = "SIGN"
+possible_values = ["signed", "unsigned"]
+possible_values_help = ["Use signed samples", "Use unsigned samples"]
+help = "Specify the sign of raw samples."
+
+[[command.options]]
+id = "endian"
+names = ["--endian"]
+action = "value"
+value_name = "ENDIAN"
+possible_values = ["big", "little"]
+possible_values_help = ["Use big-endian samples", "Use little-endian samples"]
+help = "Specify the byte order for raw samples."
+
+[[command.options]]
+id = "channels"
+names = ["--channels"]
+action = "value"
+value_name = "#"
+help = "Specify the number of channels in raw input."
+
+[[command.options]]
+id = "bps"
+names = ["--bps"]
+action = "value"
+value_name = "#"
+help = "Specify the bits per sample in raw input."
+
+[[command.options]]
+id = "sample_rate"
+names = ["--sample-rate"]
+action = "value"
+value_name = "#"
+help = "Specify the sample rate in Hz for raw input."
+
+[[command.options]]
+id = "input_size"
+names = ["--input-size"]
+action = "value"
+value_name = "#"
+help = "Specify the size of raw input in bytes."
+
+# Analysis options
+[[command.options]]
+id = "residual_text"
+names = ["--residual-text"]
+action = "flag"
+help = "Include the residual signal in the analysis file."
+
+[[command.options]]
+id = "residual_gnuplot"
+names = ["--residual-gnuplot"]
+action = "flag"
+help = "Generate a gnuplot file for every subframe."
+
+# Negative options
+[[command.options]]
+id = "no_adaptive_mid_side"
+names = ["--no-adaptive-mid-side"]
+action = "flag"
+help = "Disable adaptive mid-side coding."
+
+[[command.options]]
+id = "no_cued_seekpoints"
+names = ["--no-cued-seekpoints"]
+action = "flag"
+help = "Do not add seekpoints for cuesheet index points."
+
+[[command.options]]
+id = "no_decode_through_errors"
+names = ["--no-decode-through-errors"]
+action = "flag"
+help = "Disable decoding through stream errors."
+
+[[command.options]]
+id = "no_delete_input_file"
+names = ["--no-delete-input-file"]
+action = "flag"
+help = "Do not delete input files after a successful encode or decode."
+
+[[command.options]]
+id = "no_error_on_compression_fail"
+names = ["--no-error-on-compression-fail"]
+action = "flag"
+help = "Do not treat compression failures as errors."
+
+[[command.options]]
+id = "no_preserve_modtime"
+names = ["--no-preserve-modtime"]
+action = "flag"
+help = "Do not preserve input timestamps and permissions on output files."
+
+[[command.options]]
+id = "no_keep_foreign_metadata"
+names = ["--no-keep-foreign-metadata"]
+action = "flag"
+help = "Disable keeping or restoring foreign metadata."
+
+[[command.options]]
+id = "no_exhaustive_model_search"
+names = ["--no-exhaustive-model-search"]
+action = "flag"
+help = "Disable exhaustive model search."
+
+[[command.options]]
+id = "no_ignore_chunk_sizes"
+names = ["--no-ignore-chunk-sizes"]
+action = "flag"
+help = "Do not ignore WAVE and AIFF file size headers."
+
+[[command.options]]
+id = "no_force"
+names = ["--no-force"]
+action = "flag"
+help = "Disable forced overwriting of output files."
+
+[[command.options]]
+id = "no_lax"
+names = ["--no-lax"]
+action = "flag"
+help = "Disable non-Subset encoding."
+
+[[command.options]]
+id = "no_mid_side"
+names = ["--no-mid-side"]
+action = "flag"
+help = "Disable mid-side coding."
+
+[[command.options]]
+id = "no_ogg"
+names = ["--no-ogg"]
+action = "flag"
+help = "Disable Ogg FLAC output."
+
+[[command.options]]
+id = "no_padding"
+names = ["--no-padding"]
+action = "flag"
+help = "Disable writing padding metadata."
+
+[[command.options]]
+id = "no_qlp_coeff_precision_search"
+names = ["--no-qlp-coeff-prec-search"]
+action = "flag"
+help = "Disable exhaustive QLP coefficient precision search."
+
+[[command.options]]
+id = "no_replay_gain"
+names = ["--no-replay-gain"]
+action = "flag"
+help = "Disable ReplayGain calculation."
+
+[[command.options]]
+id = "no_residual_gnuplot"
+names = ["--no-residual-gnuplot"]
+action = "flag"
+help = "Disable residual gnuplot output."
+
+[[command.options]]
+id = "no_residual_text"
+names = ["--no-residual-text"]
+action = "flag"
+help = "Disable residual text output."
+
+[[command.options]]
+id = "no_seektable"
+names = ["--no-seektable"]
+action = "flag"
+help = "Disable writing a SEEKTABLE metadata block."
+
+[[command.options]]
+id = "no_silent"
+names = ["--no-silent"]
+action = "flag"
+help = "Disable silent mode."
+
+[[command.options]]
+id = "no_verify"
+names = ["--no-verify"]
+action = "flag"
+help = "Disable verification of encoded output."
+
+[[command.options]]
+id = "no_warnings_as_errors"
+names = ["--no-warnings-as-errors"]
+action = "flag"
+help = "Do not treat warnings as errors."
+
+[[command.arguments]]
+id = "input_file"
+position = 1
+value_name = "INPUTFILE"
+multiple = true
+value_hint = "any_path"
+help = "Input WAVE, RF64, AIFF, raw, FLAC, or Ogg FLAC files; use - for stdin."

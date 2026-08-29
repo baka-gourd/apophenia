@@ -1,0 +1,406 @@
+schema_version = 1
+
+[command]
+name = "metaflac"
+binary = "metaflac"
+description = "List, add, remove, or edit metadata in FLAC files"
+supported_versions = ["1.5.0"]
+version_commands = [["--help"]]
+disable_help_flag = true
+
+[[command.version_preprocessors]]
+engine = "regex"
+pattern = "(?s).*metaflac - Command-line FLAC metadata editor version (?P<version>[0-9]+[.][0-9]+[.][0-9]+).*"
+replace = "$version"
+
+# Version/help options are accepted by current metaflac releases.
+[[command.options]]
+id = "version"
+names = ["--version"]
+action = "flag"
+help = "Show the metaflac version number."
+
+[[command.options]]
+id = "help"
+names = ["--help"]
+action = "help"
+help = "Show usage and the available options and operations."
+
+# Global options
+[[command.options]]
+id = "output_name"
+names = ["-o", "--output-name"]
+action = "value"
+value_name = "FILENAME"
+value_hint = "file_path"
+help = "Output to a new file instead of changing or rewriting the input file."
+
+[[command.options]]
+id = "preserve_modtime"
+names = ["--preserve-modtime"]
+action = "flag"
+help = "Preserve the original modification time in spite of edits."
+
+[[command.options]]
+id = "with_filename"
+names = ["--with-filename"]
+action = "flag"
+help = "Prefix each output line with the FLAC file name."
+
+[[command.options]]
+id = "no_filename"
+names = ["--no-filename"]
+action = "flag"
+help = "Do not prefix each output line with the FLAC file name."
+
+[[command.options]]
+id = "no_utf8_convert"
+names = ["--no-utf8-convert"]
+action = "flag"
+help = "Do not convert tags between UTF-8 and the local charset."
+
+[[command.options]]
+id = "dont_use_padding"
+names = ["--dont-use-padding"]
+action = "flag"
+help = "Do not use padding when metadata size changes."
+
+[[command.options]]
+id = "no_cued_seekpoints"
+names = ["--no-cued-seekpoints"]
+action = "flag"
+help = "Do not add seekpoints for cuesheet index points."
+
+# Shorthand operations
+[[command.options]]
+id = "show_md5sum"
+names = ["--show-md5sum"]
+action = "flag"
+help = "Show the MD5 signature from the STREAMINFO block."
+
+[[command.options]]
+id = "show_min_blocksize"
+names = ["--show-min-blocksize"]
+action = "flag"
+help = "Show the minimum block size from the STREAMINFO block."
+
+[[command.options]]
+id = "show_max_blocksize"
+names = ["--show-max-blocksize"]
+action = "flag"
+help = "Show the maximum block size from the STREAMINFO block."
+
+[[command.options]]
+id = "show_min_framesize"
+names = ["--show-min-framesize"]
+action = "flag"
+help = "Show the minimum frame size from the STREAMINFO block."
+
+[[command.options]]
+id = "show_max_framesize"
+names = ["--show-max-framesize"]
+action = "flag"
+help = "Show the maximum frame size from the STREAMINFO block."
+
+[[command.options]]
+id = "show_sample_rate"
+names = ["--show-sample-rate"]
+action = "flag"
+help = "Show the sample rate from the STREAMINFO block."
+
+[[command.options]]
+id = "show_channels"
+names = ["--show-channels"]
+action = "flag"
+help = "Show the number of channels from the STREAMINFO block."
+
+[[command.options]]
+id = "show_bps"
+names = ["--show-bps"]
+action = "flag"
+help = "Show the bits per sample from the STREAMINFO block."
+
+[[command.options]]
+id = "show_total_samples"
+names = ["--show-total-samples"]
+action = "flag"
+help = "Show the total number of samples from the STREAMINFO block."
+
+[[command.options]]
+id = "show_vendor_tag"
+names = ["--show-vendor-tag"]
+action = "flag"
+help = "Show the vendor string from the VORBIS_COMMENT block."
+
+[[command.options]]
+id = "show_tag"
+names = ["--show-tag"]
+action = "value"
+value_name = "NAME"
+multiple = true
+help = "Show all tags whose field name matches NAME."
+
+[[command.options]]
+id = "show_all_tags"
+names = ["--show-all-tags"]
+action = "flag"
+help = "Show all tags."
+
+[[command.options]]
+id = "remove_tag"
+names = ["--remove-tag"]
+action = "value"
+value_name = "NAME"
+multiple = true
+help = "Remove all tags whose field name is NAME."
+
+[[command.options]]
+id = "remove_first_tag"
+names = ["--remove-first-tag"]
+action = "value"
+value_name = "NAME"
+multiple = true
+help = "Remove the first tag whose field name is NAME."
+
+[[command.options]]
+id = "remove_all_tags"
+names = ["--remove-all-tags"]
+action = "flag"
+help = "Remove all tags, leaving only the vendor string."
+
+[[command.options]]
+id = "remove_all_tags_except"
+names = ["--remove-all-tags-except"]
+action = "value"
+value_name = "NAME1[=NAME2[=...]]"
+help = "Remove all tags except the vendor string and the specified tag names."
+
+[[command.options]]
+id = "set_tag"
+names = ["--set-tag"]
+action = "value"
+value_name = "FIELD"
+multiple = true
+help = "Add a tag in the form NAME=VALUE."
+
+[[command.options]]
+id = "set_tag_from_file"
+names = ["--set-tag-from-file"]
+action = "value"
+value_name = "FIELD"
+multiple = true
+help = "Add a tag whose value is read verbatim from a file."
+
+[[command.options]]
+id = "import_tags_from"
+names = ["--import-tags-from"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Import tags from a file."
+
+[[command.options]]
+id = "export_tags_to"
+names = ["--export-tags-to"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Export tags to a file."
+
+[[command.options]]
+id = "import_cuesheet_from"
+names = ["--import-cuesheet-from"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Import a cuesheet from a file."
+
+[[command.options]]
+id = "export_cuesheet_to"
+names = ["--export-cuesheet-to"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Export the CUESHEET block to a cuesheet file."
+
+[[command.options]]
+id = "import_picture_from"
+names = ["--import-picture-from"]
+action = "value"
+value_name = "FILENAME|SPECIFICATION"
+multiple = true
+help = "Import a picture and store it in a PICTURE metadata block."
+
+[[command.options]]
+id = "export_picture_to"
+names = ["--export-picture-to"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Export a PICTURE block to a file."
+
+[[command.options]]
+id = "add_replay_gain"
+names = ["--add-replay-gain"]
+action = "flag"
+help = "Calculate and store title and album ReplayGain tags."
+
+[[command.options]]
+id = "scan_replay_gain"
+names = ["--scan-replay-gain"]
+action = "flag"
+help = "Analyze ReplayGain without writing tags."
+
+[[command.options]]
+id = "remove_replay_gain"
+names = ["--remove-replay-gain"]
+action = "flag"
+help = "Remove the ReplayGain tags."
+
+[[command.options]]
+id = "add_seekpoint"
+names = ["--add-seekpoint"]
+action = "value"
+value_name = "#|X|#x|#s"
+multiple = true
+help = "Add seek points to a SEEKTABLE block."
+
+[[command.options]]
+id = "add_padding"
+names = ["--add-padding"]
+action = "value"
+value_name = "LENGTH"
+help = "Add a padding block of the given length in bytes."
+
+# Major operations and their selectors
+[[command.options]]
+id = "list"
+names = ["--list"]
+action = "flag"
+help = "List the contents of one or more metadata blocks."
+
+[[command.options]]
+id = "remove"
+names = ["--remove"]
+action = "flag"
+help = "Remove one or more metadata blocks."
+
+[[command.options]]
+id = "block_number"
+names = ["--block-number"]
+action = "value"
+value_name = "#[,#...]"
+help = "Select metadata blocks by their block numbers."
+
+[[command.options]]
+id = "block_type"
+names = ["--block-type"]
+action = "value"
+value_name = "TYPE[,TYPE...]"
+help = "Select metadata blocks by type."
+
+[[command.options.candidates]]
+value = "STREAMINFO"
+help = "The STREAMINFO metadata block"
+
+[[command.options.candidates]]
+value = "PADDING"
+help = "The PADDING metadata block"
+
+[[command.options.candidates]]
+value = "APPLICATION"
+help = "The APPLICATION metadata block"
+
+[[command.options.candidates]]
+value = "SEEKTABLE"
+help = "The SEEKTABLE metadata block"
+
+[[command.options.candidates]]
+value = "VORBIS_COMMENT"
+help = "The VORBIS_COMMENT metadata block"
+
+[[command.options.candidates]]
+value = "PICTURE"
+help = "The PICTURE metadata block"
+
+[[command.options]]
+id = "except_block_type"
+names = ["--except-block-type"]
+action = "value"
+value_name = "TYPE[,TYPE...]"
+help = "Select metadata blocks by type to ignore."
+
+[[command.options.candidates]]
+value = "STREAMINFO"
+help = "The STREAMINFO metadata block"
+
+[[command.options.candidates]]
+value = "PADDING"
+help = "The PADDING metadata block"
+
+[[command.options.candidates]]
+value = "APPLICATION"
+help = "The APPLICATION metadata block"
+
+[[command.options.candidates]]
+value = "SEEKTABLE"
+help = "The SEEKTABLE metadata block"
+
+[[command.options.candidates]]
+value = "VORBIS_COMMENT"
+help = "The VORBIS_COMMENT metadata block"
+
+[[command.options.candidates]]
+value = "PICTURE"
+help = "The PICTURE metadata block"
+
+[[command.options]]
+id = "application_data_format"
+names = ["--application-data-format"]
+action = "value"
+value_name = "FORMAT"
+possible_values = ["hexdump", "text"]
+possible_values_help = ["Display application data as a hexadecimal dump", "Display application data as text"]
+help = "Choose how to display application block data."
+
+[[command.options]]
+id = "data_format"
+names = ["--data-format"]
+action = "value"
+value_name = "FORMAT"
+possible_values = ["binary", "binary-headerless", "text"]
+possible_values_help = ["Dump raw binary metadata blocks", "Dump binary blocks without metadata headers", "Display metadata in human-readable text"]
+help = "Choose the metadata output format for --list."
+
+[[command.options]]
+id = "append"
+names = ["--append"]
+action = "flag"
+help = "Insert a metadata block read from a file or standard input."
+
+[[command.options]]
+id = "remove_all"
+names = ["--remove-all"]
+action = "flag"
+help = "Remove all metadata blocks except STREAMINFO."
+
+[[command.options]]
+id = "merge_padding"
+names = ["--merge-padding"]
+action = "flag"
+help = "Merge adjacent PADDING blocks into single blocks."
+
+[[command.options]]
+id = "sort_padding"
+names = ["--sort-padding"]
+action = "flag"
+help = "Move all PADDING blocks to the end and merge them."
+
+[[command.arguments]]
+id = "flac_file"
+position = 1
+value_name = "FLACFILE"
+required = true
+multiple = true
+value_hint = "file_path"
+help = "One or more FLAC files to inspect or edit."
