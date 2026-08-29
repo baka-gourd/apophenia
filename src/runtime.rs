@@ -48,6 +48,7 @@ pub fn build_command(bundle: &LoadedBundle) -> Result<Command> {
         &argument_completers,
         &command_candidates,
         &bundle.version.binary_name,
+        &[],
     )
 }
 
@@ -65,6 +66,7 @@ fn build_command_node(
     argument_completers: &HashMap<i64, Vec<&CompleterRow>>,
     command_candidates: &HashMap<i64, Vec<&CommandCandidateRow>>,
     binary_name: &str,
+    inherited_raw_options: &[CandidateData],
 ) -> Result<Command> {
     let mut command = Command::new(row.name.clone());
     if row.parent_id.is_none() {
@@ -100,6 +102,8 @@ fn build_command_node(
         }
     }
 
+    let mut visible_raw_options = inherited_raw_options.to_vec();
+    let mut child_raw_options = inherited_raw_options.to_vec();
     for option in options.get(&row.id).into_iter().flatten() {
         let names = option_names.get(&option.id).cloned().unwrap_or_default();
         let values = option_values.get(&option.id).cloned().unwrap_or_default();
@@ -107,7 +111,18 @@ fn build_command_node(
             .get(&option.id)
             .cloned()
             .unwrap_or_default();
-        command = command.arg(build_option(option, &names, &values, &completers)?);
+        let raw_options = names
+            .iter()
+            .filter(|name| name.token_kind == "other")
+            .map(|name| raw_option_candidate(option, name))
+            .collect::<Vec<_>>();
+        visible_raw_options.extend(raw_options.iter().cloned());
+        if option.global {
+            child_raw_options.extend(raw_options);
+        }
+        if let Some(argument) = build_option(option, &names, &values, &completers)? {
+            command = command.arg(argument);
+        }
     }
     for argument in arguments.get(&row.id).into_iter().flatten() {
         let values = argument_values
@@ -141,16 +156,23 @@ fn build_command_node(
             argument_completers,
             command_candidates,
             binary_name,
+            &child_raw_options,
         )?);
     }
 
-    if let Some(candidates) = command_candidates.get(&row.id)
-        && !candidates.is_empty()
-    {
-        let candidates = candidates
-            .iter()
-            .map(|candidate| candidate_data(candidate))
-            .collect::<Vec<_>>();
+    let mut candidates = command_candidates
+        .get(&row.id)
+        .into_iter()
+        .flatten()
+        .map(|candidate| candidate_data(candidate))
+        .collect::<Vec<_>>();
+    candidates.extend(visible_raw_options);
+    if !candidates.is_empty() {
+        // clap_complete exposes SubcommandCandidates only when external
+        // subcommands are enabled. It is also the only shell-agnostic way
+        // to preserve zpaqfranz's multi-character single-dash options such
+        // as `-verbose`, which clap cannot represent as an Arg name.
+        command = command.allow_external_subcommands(true);
         command = command.add(SubcommandCandidates::new(move || {
             candidates.iter().map(candidate_value).collect()
         }));
@@ -163,7 +185,13 @@ fn build_option(
     names: &[&OptionNameRow],
     values: &[&ValueRow],
     completers: &[&CompleterRow],
-) -> Result<Arg> {
+) -> Result<Option<Arg>> {
+    if !names
+        .iter()
+        .any(|name| matches!(name.token_kind.as_str(), "long" | "short"))
+    {
+        return Ok(None);
+    }
     let mut argument = Arg::new(row.stable_id.clone());
     argument = apply_option_names(argument, names)?;
     argument = apply_common_arg_fields(
@@ -195,7 +223,7 @@ fn build_option(
         &row.overrides_with,
     )?;
     argument = argument.action(arg_action(&row.action, row.multiple)?);
-    apply_value_completion(argument, values, completers)
+    apply_value_completion(argument, values, completers).map(Some)
 }
 
 fn build_argument(
@@ -266,9 +294,7 @@ fn apply_option_names(mut argument: Arg, names: &[&OptionNameRow]) -> Result<Arg
             ("visible_alias", OptionToken::Short(value)) => {
                 argument = argument.visible_short_alias(value)
             }
-            (_, OptionToken::Other(value)) => {
-                bail!("option token `{value}` cannot be represented by clap")
-            }
+            (_, OptionToken::Other) => {}
             (kind, _) => bail!("unknown option name kind `{kind}`"),
         }
     }
@@ -278,7 +304,7 @@ fn apply_option_names(mut argument: Arg, names: &[&OptionNameRow]) -> Result<Arg
 enum OptionToken {
     Long(String),
     Short(char),
-    Other(String),
+    Other,
 }
 
 fn parse_option_token(value: &str) -> Result<OptionToken> {
@@ -292,7 +318,7 @@ fn parse_option_token(value: &str) -> Result<OptionToken> {
     {
         return Ok(OptionToken::Short(value.chars().next().expect("one char")));
     }
-    Ok(OptionToken::Other(value.to_owned()))
+    Ok(OptionToken::Other)
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -497,6 +523,18 @@ struct CandidateData {
     tag: Option<String>,
     display_order: Option<usize>,
     hidden: bool,
+}
+
+fn raw_option_candidate(option: &OptionRow, name: &OptionNameRow) -> CandidateData {
+    CandidateData {
+        value: name.name.clone(),
+        prefix: None,
+        help: option.help.clone(),
+        id: Some(format!("raw-option::{}::{}", option.stable_id, name.name)),
+        tag: Some("Options".to_owned()),
+        display_order: usize::try_from(option.position).ok(),
+        hidden: option.hidden,
+    }
 }
 
 fn candidate_data(row: &CommandCandidateRow) -> CandidateData {
