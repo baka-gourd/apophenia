@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://apophenia.invalid/schemas/plain.schema.json",
+  "title": "Apophenia plain command manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Version of the human-maintained manifest format."
+    },
+    "command": {
+      "$ref": "#/$defs/command"
+    }
+  },
+  "required": ["command"],
+  "$defs": {
+    "string_array": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "boolean_array": {
+      "type": "array",
+      "items": {"type": "boolean"}
+    },
+    "command": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "aliases": {"$ref": "#/$defs/string_array"},
+        "visible_aliases": {"$ref": "#/$defs/string_array"},
+        "binary": {"type": "string", "minLength": 1},
+        "platforms": {"$ref": "#/$defs/string_array"},
+        "description": {"type": "string"},
+        "long_description": {"type": "string"},
+        "hidden": {"type": "boolean"},
+        "position": {"type": "integer", "minimum": 0},
+        "supported_versions": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "minItems": 1
+        },
+        "version_commands": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {"type": "string"},
+            "minItems": 1
+          }
+        },
+        "version_preprocessors": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/version_preprocessor"}
+        },
+        "options": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/option"}
+        },
+        "arguments": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/argument"}
+        },
+        "subcommand_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/candidate"}
+        },
+        "subcommand_required": {"type": "boolean"},
+        "arg_required_else_help": {"type": "boolean"},
+        "subcommand_precedence_over_arg": {"type": "boolean"},
+        "infer_subcommands": {"type": "boolean"},
+        "disable_help_subcommand": {"type": "boolean"},
+        "allow_external_subcommands": {"type": "boolean"},
+        "args_conflicts_with_subcommands": {"type": "boolean"},
+        "subcommand_negates_reqs": {"type": "boolean"},
+        "multicall": {"type": "boolean"},
+        "no_binary_name": {"type": "boolean"},
+        "disable_help_flag": {"type": "boolean"},
+        "disable_version_flag": {"type": "boolean"}
+      },
+      "required": ["name"]
+    },
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "names": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "minItems": 1
+        },
+        "aliases": {"$ref": "#/$defs/string_array"},
+        "visible_aliases": {"$ref": "#/$defs/string_array"},
+        "action": {
+          "enum": ["flag", "value", "append", "set_true", "set_false", "count", "help", "help_short", "help_long"]
+        },
+        "help": {"type": "string"},
+        "long_help": {"type": "string"},
+        "value_name": {"type": "string"},
+        "value_names": {"$ref": "#/$defs/string_array"},
+        "value_hint": {"$ref": "#/$defs/value_hint"},
+        "required": {"type": "boolean"},
+        "global": {"type": "boolean"},
+        "multiple": {"type": "boolean"},
+        "hidden": {"type": "boolean"},
+        "hide_possible_values": {"type": "boolean"},
+        "value_delimiter": {"type": "string", "minLength": 1, "maxLength": 1},
+        "value_terminator": {"type": "string"},
+        "default_value": {"type": "string"},
+        "default_missing_value": {"type": "string"},
+        "require_equals": {"type": "boolean"},
+        "allow_hyphen_values": {"type": "boolean"},
+        "allow_negative_numbers": {"type": "boolean"},
+        "exclusive": {"type": "boolean"},
+        "last": {"type": "boolean"},
+        "trailing_var_arg": {"type": "boolean"},
+        "requires": {"$ref": "#/$defs/string_array"},
+        "conflicts_with": {"$ref": "#/$defs/string_array"},
+        "overrides_with": {"$ref": "#/$defs/string_array"},
+        "min_values": {"type": "integer", "minimum": 0},
+        "max_values": {"type": "integer", "minimum": 0},
+        "possible_values": {"$ref": "#/$defs/string_array"},
+        "possible_values_help": {"$ref": "#/$defs/string_array"},
+        "possible_values_hidden": {"$ref": "#/$defs/boolean_array"},
+        "candidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/candidate"}
+        },
+        "value_completers": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/value_completer"}
+        },
+        "path_completion": {"$ref": "#/$defs/path_completion"}
+      },
+      "required": ["id", "names"]
+    },
+    "argument": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "position": {"type": "integer", "minimum": 1},
+        "help": {"type": "string"},
+        "long_help": {"type": "string"},
+        "value_name": {"type": "string"},
+        "value_names": {"$ref": "#/$defs/string_array"},
+        "value_hint": {"$ref": "#/$defs/value_hint"},
+        "required": {"type": "boolean"},
+        "global": {"type": "boolean"},
+        "multiple": {"type": "boolean"},
+        "hidden": {"type": "boolean"},
+        "hide_possible_values": {"type": "boolean"},
+        "value_delimiter": {"type": "string", "minLength": 1, "maxLength": 1},
+        "value_terminator": {"type": "string"},
+        "default_value": {"type": "string"},
+        "default_missing_value": {"type": "string"},
+        "require_equals": {"type": "boolean"},
+        "allow_hyphen_values": {"type": "boolean"},
+        "allow_negative_numbers": {"type": "boolean"},
+        "exclusive": {"type": "boolean"},
+        "last": {"type": "boolean"},
+        "trailing_var_arg": {"type": "boolean"},
+        "requires": {"$ref": "#/$defs/string_array"},
+        "conflicts_with": {"$ref": "#/$defs/string_array"},
+        "overrides_with": {"$ref": "#/$defs/string_array"},
+        "min_values": {"type": "integer", "minimum": 0},
+        "max_values": {"type": "integer", "minimum": 0},
+        "possible_values": {"$ref": "#/$defs/string_array"},
+        "possible_values_help": {"$ref": "#/$defs/string_array"},
+        "possible_values_hidden": {"$ref": "#/$defs/boolean_array"},
+        "candidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/candidate"}
+        },
+        "value_completers": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/value_completer"}
+        },
+        "path_completion": {"$ref": "#/$defs/path_completion"}
+      },
+      "required": ["id", "position"]
+    },
+    "value_hint": {
+      "enum": ["unknown", "other", "any_path", "file_path", "dir_path", "executable_path", "command_name", "command_string", "command_with_arguments", "username", "hostname", "url", "email_address"]
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {"type": "string", "minLength": 1},
+        "prefix": {"type": "string"},
+        "help": {"type": "string"},
+        "id": {"type": "string"},
+        "tag": {"type": "string"},
+        "display_order": {"type": "integer", "minimum": 0},
+        "hidden": {"type": "boolean"}
+      },
+      "required": ["value"]
+    },
+    "value_completer": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {"const": "candidates"},
+            "arg_index": {"type": "integer", "minimum": 0},
+            "candidates": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/candidate"}
+            }
+          },
+          "required": ["kind", "candidates"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {"const": "path"},
+            "arg_index": {"type": "integer", "minimum": 0},
+            "path_kind": {"enum": ["any", "file", "dir"]},
+            "stdio": {"type": "boolean"},
+            "current_dir": {"type": "string"}
+          },
+          "required": ["kind", "path_kind"]
+        }
+      ]
+    },
+    "path_completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {"enum": ["any", "file", "dir"]},
+        "stdio": {"type": "boolean"},
+        "current_dir": {"type": "string"}
+      },
+      "required": ["kind"]
+    },
+    "version_preprocessor": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "engine": {"const": "regex"},
+            "pattern": {"type": "string"},
+            "replace": {"type": "string"}
+          },
+          "required": ["engine", "pattern", "replace"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "engine": {"const": "minijinja"},
+            "template": {"type": "string"}
+          },
+          "required": ["engine", "template"]
+        }
+      ]
+    }
+  }
+}

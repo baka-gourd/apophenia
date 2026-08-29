@@ -1,0 +1,6 @@
+toml-version = "v1.1.0"
+
+[[schemas]]
+toml-version = "v1.1.0"
+path = "schemas/plain.schema.json"
+include = ["commands/**/main.toml"]
