@@ -1,0 +1,19 @@
+[command]
+name = "rsync"
+description = "Synchronize local files to an SFTP folder"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "files"
+position = 1
+value_name = "FILE"
+multiple = true
+value_hint = "any_path"
+
+[[command.arguments]]
+id = "remote_dir"
+position = 2
+value_name = "PATH"
+last = true

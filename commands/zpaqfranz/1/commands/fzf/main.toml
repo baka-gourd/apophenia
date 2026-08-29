@@ -1,0 +1,12 @@
+[command]
+name = "fzf"
+description = "List archive contents in plain format"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "file_path"

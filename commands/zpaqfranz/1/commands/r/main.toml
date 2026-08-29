@@ -1,0 +1,40 @@
+[command]
+name = "r"
+description = "Mirror a master folder to destination folders"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "buffer"
+names = ["-buffer"]
+action = "value"
+value_name = "BYTES"
+help = "Set the input buffer size"
+
+[[command.options]]
+id = "append"
+names = ["-append"]
+action = "flag"
+help = "Use append-only mode"
+
+[[command.options]]
+id = "zero"
+names = ["-zero"]
+action = "flag"
+help = "Fill output files with zeros"
+
+[[command.options]]
+id = "bandwidth"
+names = ["-bandwidth"]
+action = "value"
+value_name = "RATE"
+help = "Limit write speed"
+
+[[command.arguments]]
+id = "directories"
+position = 1
+value_name = "DIR"
+multiple = true
+value_hint = "dir_path"
+help = "Master directory followed by destinations"

@@ -1,0 +1,96 @@
+[command]
+name = "x"
+description = "Extract files from an archive"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "PATH"
+value_hint = "any_path"
+help = "Extraction destination"
+
+[[command.options]]
+id = "ramdisk"
+names = ["-ramdisk"]
+action = "flag"
+help = "Extract to RAM before writing"
+
+[[command.options]]
+id = "ramsize"
+names = ["-ramsize"]
+action = "value"
+value_name = "BYTES"
+help = "Allocate virtual memory across swap files"
+
+[[command.options]]
+id = "huge"
+names = ["-huge"]
+action = "flag"
+help = "Use the huge-file write policy"
+
+[[command.options]]
+id = "sparse"
+names = ["-sparse"]
+action = "flag"
+help = "Create sparse files when possible"
+
+[[command.options]]
+id = "fixreserved"
+names = ["-fixreserved"]
+action = "flag"
+help = "Fix reserved Windows filenames"
+
+[[command.options]]
+id = "external"
+names = ["-external"]
+action = "flag"
+help = "Show stored external files"
+
+[[command.options]]
+id = "tar"
+names = ["-tar"]
+action = "flag"
+help = "Restore POSIX metadata"
+
+[[command.options]]
+id = "range"
+names = ["-range"]
+action = "value"
+value_name = "RANGE"
+help = "Select a version range"
+
+[[command.options]]
+id = "zero"
+names = ["-zero"]
+action = "flag"
+help = "Create zero-length placeholder files"
+
+[[command.options]]
+id = "stdout"
+names = ["-stdout"]
+action = "flag"
+help = "Write a single extracted file to standard output"
+
+[[command.options]]
+id = "image"
+names = ["-image"]
+action = "flag"
+help = "Use progress handling for huge files"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "any_path"
+
+[[command.arguments]]
+id = "paths"
+position = 2
+value_name = "PATH"
+multiple = true
+last = true
+value_hint = "any_path"

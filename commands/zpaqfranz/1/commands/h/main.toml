@@ -1,0 +1,13 @@
+[command]
+name = "h"
+description = "Show help for a command"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "command"
+position = 1
+value_name = "COMMAND"
+possible_values = ["1on1", "a", "ads", "autotest", "b", "backup", "c", "checkpassword", "cloud", "collision", "comparehex", "consolidate", "count", "cp", "crop", "d", "dir", "dirsize", "download", "drive", "drives", "dump", "e", "f", "find", "franz", "fzf", "g", "h", "hash", "i", "isopen", "k", "l", "last", "last2", "ls", "m", "main", "mysqldump", "n", "ntfs", "p", "pakka", "password", "pause", "q", "r", "rd", "redu", "rsync", "s", "sftp", "sfx", "sha1", "ssh", "sum", "sync", "t", "testbackup", "trim", "tui", "update", "upgrade", "utf", "versum", "w", "work", "x", "z", "common"]
+help = "Command to describe"

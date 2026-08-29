@@ -1,0 +1,18 @@
+[command]
+name = "pakka"
+description = "Create zpaqlist-compatible output"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "distinct"
+names = ["-distinct"]
+action = "flag"
+help = "Do not deduplicate the output"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "file_path"

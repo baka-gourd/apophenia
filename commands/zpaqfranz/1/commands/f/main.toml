@@ -1,0 +1,18 @@
+[command]
+name = "f"
+description = "Fill or wipe free disk space"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "zero"
+names = ["-zero"]
+action = "flag"
+help = "Zero-fill instead of writing random data"
+
+[[command.arguments]]
+id = "directory"
+position = 1
+value_name = "DIR"
+value_hint = "dir_path"

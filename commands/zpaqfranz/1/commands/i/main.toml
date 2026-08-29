@@ -1,0 +1,25 @@
+[command]
+name = "i"
+description = "Show archive versions, sizes, and comments"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "stat"
+names = ["-stat"]
+action = "flag"
+help = "Count unusual files and show uncompressed size"
+
+[[command.options]]
+id = "range"
+names = ["-range"]
+action = "value"
+value_name = "RANGE"
+help = "Select a version range"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "file_path"

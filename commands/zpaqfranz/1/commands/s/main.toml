@@ -1,0 +1,25 @@
+[command]
+name = "s"
+description = "Show cumulative directory sizes"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "home"
+names = ["-home"]
+action = "flag"
+help = "Show one-level cumulative size"
+
+[[command.options]]
+id = "ignore"
+names = ["-ignore"]
+action = "flag"
+help = "Ignore file errors"
+
+[[command.arguments]]
+id = "directories"
+position = 1
+value_name = "DIR"
+multiple = true
+value_hint = "dir_path"

@@ -1,0 +1,17 @@
+[command]
+name = "upload"
+description = "Upload one local file to SFTP"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "local_file"
+position = 1
+value_name = "FILE"
+value_hint = "file_path"
+
+[[command.arguments]]
+id = "remote_file"
+position = 2
+value_name = "PATH"

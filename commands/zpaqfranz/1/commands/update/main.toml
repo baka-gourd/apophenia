@@ -1,0 +1,14 @@
+[command]
+name = "update"
+visible_aliases = ["upgrade"]
+description = "Check for or download a zpaqfranz update"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "urls"
+position = 1
+value_name = "URL"
+multiple = true
+value_hint = "url"

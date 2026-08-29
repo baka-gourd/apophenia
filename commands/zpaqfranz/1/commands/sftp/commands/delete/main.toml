@@ -1,0 +1,11 @@
+[command]
+name = "delete"
+description = "Delete a remote SFTP file"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "remote_file"
+position = 1
+value_name = "PATH"

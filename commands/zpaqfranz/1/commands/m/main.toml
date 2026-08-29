@@ -1,0 +1,18 @@
+[command]
+name = "m"
+description = "Merge multipart archive pieces"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "parts"
+position = 1
+value_name = "PATTERN"
+value_hint = "any_path"
+
+[[command.arguments]]
+id = "output"
+position = 2
+value_name = "ARCHIVE"
+value_hint = "file_path"

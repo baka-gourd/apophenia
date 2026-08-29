@@ -1,0 +1,12 @@
+[command]
+name = "md5sum"
+description = "Compare a local folder with a remote folder using MD5"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "local_path"
+position = 1
+value_name = "PATH"
+value_hint = "any_path"

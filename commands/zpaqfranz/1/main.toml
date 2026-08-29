@@ -1,0 +1,726 @@
+schema_version = 1
+
+[command]
+name = "zpaqfranz"
+binary = "zpaqfranz"
+description = "Top tier archiver with deduplication and hardware-assisted hashing"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+supported_versions = ["*"]
+
+# zpaqfranz uses one-dash long switches.  The command database keeps those
+# spellings verbatim so the completion layer can present the same tokens as
+# the program's help output.  The options below are the switches shared by
+# the command family; command-specific switches live with their command.
+
+[[command.options]]
+id = "until"
+names = ["-until"]
+action = "value"
+value_name = "VERSION_OR_DATE"
+global = true
+help = "Set a version or date limit"
+
+[[command.options]]
+id = "not"
+names = ["-not"]
+action = "value"
+value_name = "PATTERN"
+multiple = true
+global = true
+help = "Exclude matching files"
+
+[[command.options]]
+id = "only"
+names = ["-only"]
+action = "value"
+value_name = "PATTERN"
+multiple = true
+global = true
+help = "Include only matching files"
+
+[[command.options]]
+id = "always"
+names = ["-always"]
+action = "value"
+value_name = "PATTERN"
+multiple = true
+global = true
+help = "Always include matching files"
+
+[[command.options]]
+id = "noattributes"
+names = ["-noattributes"]
+action = "flag"
+global = true
+help = "Do not save file attributes or permissions"
+
+[[command.options]]
+id = "index"
+names = ["-index"]
+action = "value"
+value_name = "FILE_OR_DIR"
+global = true
+help = "Create or use an archive index"
+
+[[command.options]]
+id = "715"
+names = ["-715"]
+action = "flag"
+global = true
+help = "Work like zpaq 7.15"
+
+[[command.options]]
+id = "all"
+names = ["-all"]
+action = "flag"
+global = true
+help = "Use all archive versions"
+
+[[command.options]]
+id = "big"
+names = ["-big"]
+action = "flag"
+global = true
+help = "Show the large ASCII-art result"
+
+[[command.options]]
+id = "checksum"
+names = ["-checksum"]
+action = "flag"
+global = true
+help = "Store or verify SHA-1 and CRC-32 checksums"
+
+[[command.options]]
+id = "comment"
+names = ["-comment"]
+action = "value"
+value_name = "TEXT"
+global = true
+help = "Add or show an ASCII version comment"
+
+[[command.options]]
+id = "debug"
+names = ["-debug"]
+action = "flag"
+global = true
+help = "Show detailed debugging information"
+
+[[command.options]]
+id = "dirlength"
+names = ["-dirlength"]
+action = "value"
+value_name = "BYTES"
+global = true
+help = "Report directories longer than this size"
+
+[[command.options]]
+id = "filelength"
+names = ["-filelength"]
+action = "value"
+value_name = "BYTES"
+global = true
+help = "Report files longer than this size"
+
+[[command.options]]
+id = "filelist"
+names = ["-filelist"]
+action = "flag"
+global = true
+help = "Read or store an archive file list"
+
+[[command.options]]
+id = "find"
+names = ["-find"]
+action = "value"
+value_name = "TEXT"
+global = true
+help = "Search or rewrite a path"
+
+[[command.options]]
+id = "fix255"
+names = ["-fix255"]
+action = "flag"
+global = true
+help = "Shorten paths and avoid case collisions"
+
+[[command.options]]
+id = "fixeml"
+names = ["-fixeml"]
+action = "flag"
+global = true
+help = "Normalize .eml filenames"
+
+[[command.options]]
+id = "flat"
+names = ["-flat"]
+action = "flag"
+global = true
+help = "Restore everything into one directory"
+
+[[command.options]]
+id = "forcewindows"
+names = ["-forcewindows"]
+action = "flag"
+global = true
+help = "Include Windows system data and ADS"
+
+[[command.options]]
+id = "forcezfs"
+names = ["-forcezfs"]
+action = "flag"
+global = true
+help = "Include .zfs paths"
+
+[[command.options]]
+id = "kill"
+names = ["-kill"]
+action = "flag"
+global = true
+help = "Perform the wet or destructive operation"
+
+[[command.options]]
+id = "limit"
+names = ["-limit"]
+action = "value"
+value_name = "N"
+global = true
+help = "Limit the number of results"
+
+[[command.options]]
+id = "lines"
+names = ["-n"]
+action = "value"
+value_name = "N"
+global = true
+help = "Limit the number of files or lines"
+
+[[command.options]]
+id = "nocolor"
+names = ["-nocolor"]
+action = "flag"
+global = true
+help = "Disable colors"
+
+[[command.options]]
+id = "nodedup"
+names = ["-nodedup"]
+action = "flag"
+global = true
+help = "Disable deduplication"
+
+[[command.options]]
+id = "noeta"
+names = ["-noeta"]
+action = "flag"
+global = true
+help = "Do not show an ETA"
+
+[[command.options]]
+id = "nomac"
+names = ["-nomac"]
+action = "flag"
+global = true
+help = "Skip macOS metadata files"
+
+[[command.options]]
+id = "nopath"
+names = ["-nopath"]
+action = "flag"
+global = true
+help = "Do not store paths"
+
+[[command.options]]
+id = "noqnap"
+names = ["-noqnap"]
+action = "flag"
+global = true
+help = "Skip QNAP snapshot and recycle paths"
+
+[[command.options]]
+id = "norecursion"
+names = ["-norecursion"]
+action = "flag"
+global = true
+help = "Disable recursive folder scanning"
+
+[[command.options]]
+id = "nosort"
+names = ["-nosort"]
+action = "flag"
+global = true
+help = "Do not sort files"
+
+[[command.options]]
+id = "nosynology"
+names = ["-nosynology"]
+action = "flag"
+global = true
+help = "Skip Synology snapshot and recycle paths"
+
+[[command.options]]
+id = "output"
+names = ["-output", "-out"]
+action = "value"
+value_name = "FILE"
+global = true
+help = "Also write output to a file"
+
+[[command.options]]
+id = "pakka"
+names = ["-pakka"]
+action = "flag"
+global = true
+help = "Use concise, machine-readable output"
+
+[[command.options]]
+id = "replace"
+names = ["-replace"]
+action = "value"
+value_name = "TEXT"
+global = true
+help = "Replace text in a path"
+
+[[command.options]]
+id = "silent"
+names = ["-silent"]
+action = "flag"
+global = true
+help = "Suppress output"
+
+[[command.options]]
+id = "store"
+names = ["-store"]
+action = "flag"
+global = true
+help = "Disable deduplication and compression"
+
+[[command.options]]
+id = "summary"
+names = ["-summary"]
+action = "flag"
+global = true
+help = "Show concise summary output"
+
+[[command.options]]
+id = "timestamp"
+names = ["-timestamp"]
+action = "value"
+value_name = "DATETIME"
+global = true
+help = "Set the version timestamp"
+
+[[command.options]]
+id = "utc"
+names = ["-utc"]
+action = "flag"
+global = true
+help = "Use UTC instead of local time"
+
+[[command.options]]
+id = "utf"
+names = ["-utf"]
+action = "flag"
+global = true
+help = "Remove non-UTF-8 characters"
+
+[[command.options]]
+id = "utf8"
+names = ["-utf8"]
+action = "flag"
+global = true
+help = "Alias for -utf"
+
+[[command.options]]
+id = "datefrom"
+names = ["-datefrom"]
+action = "value"
+value_name = "DATETIME"
+global = true
+help = "Select files on or before a date"
+
+[[command.options]]
+id = "dateto"
+names = ["-dateto"]
+action = "value"
+value_name = "DATETIME"
+global = true
+help = "Select files on or after a date"
+
+[[command.options]]
+id = "verbose"
+names = ["-verbose"]
+action = "flag"
+global = true
+help = "Show more information"
+
+[[command.options]]
+id = "verify"
+names = ["-verify"]
+action = "flag"
+global = true
+help = "Verify data against the filesystem"
+
+[[command.options]]
+id = "xls"
+names = ["-xls"]
+action = "flag"
+global = true
+help = "Do not force re-adding XLS/PPT files"
+
+[[command.options]]
+id = "zfs"
+names = ["-zfs"]
+action = "flag"
+global = true
+help = "Skip .zfs paths"
+
+[[command.options]]
+id = "maxsize"
+names = ["-maxsize"]
+action = "value"
+value_name = "SIZE"
+global = true
+help = "Filter by maximum file size"
+
+[[command.options]]
+id = "minsize"
+names = ["-minsize"]
+action = "value"
+value_name = "SIZE"
+global = true
+help = "Filter by minimum file size"
+
+[[command.options]]
+id = "open"
+names = ["-open"]
+action = "flag"
+global = true
+help = "Abort if an archive is already open"
+
+[[command.options]]
+id = "longpath"
+names = ["-longpath"]
+action = "flag"
+global = true
+help = "Support Windows paths longer than 255 characters"
+
+[[command.options]]
+id = "noconsole"
+names = ["-noconsole"]
+action = "flag"
+global = true
+help = "Disable console manipulation"
+
+[[command.options]]
+id = "force"
+names = ["-force"]
+action = "flag"
+global = true
+help = "Force the operation"
+
+[[command.options]]
+id = "space"
+names = ["-space"]
+action = "flag"
+global = true
+help = "Skip free-space or writable-path checks"
+
+[[command.options]]
+id = "key"
+names = ["-key"]
+action = "value"
+value_name = "PASSWORD"
+global = true
+help = "Use a password for archive encryption"
+
+[[command.options]]
+id = "ssd"
+names = ["-ssd"]
+action = "flag"
+global = true
+help = "Enable multithreading for solid-state storage"
+
+# Hash selectors shared by the hashing, compare, list, and archive commands.
+[[command.options]]
+id = "nochecksum"
+names = ["-nochecksum"]
+action = "flag"
+global = true
+help = "Disable extra checksums"
+
+[[command.options]]
+id = "crc32"
+names = ["-crc32"]
+action = "flag"
+global = true
+help = "Use CRC-32"
+
+[[command.options]]
+id = "xxhash"
+names = ["-xxhash"]
+action = "flag"
+global = true
+help = "Use XXHash"
+
+[[command.options]]
+id = "sha1"
+names = ["-sha1"]
+action = "flag"
+global = true
+help = "Use SHA-1"
+
+[[command.options]]
+id = "sha256"
+names = ["-sha256"]
+action = "flag"
+global = true
+help = "Use SHA-256"
+
+[[command.options]]
+id = "xxh3"
+names = ["-xxh3"]
+action = "flag"
+global = true
+help = "Use XXH3"
+
+[[command.options]]
+id = "blake3"
+names = ["-blake3"]
+action = "flag"
+global = true
+help = "Use BLAKE3"
+
+[[command.options]]
+id = "sha3"
+names = ["-sha3"]
+action = "flag"
+global = true
+help = "Use SHA-3"
+
+[[command.options]]
+id = "md5"
+names = ["-md5"]
+action = "flag"
+global = true
+help = "Use MD5"
+
+[[command.options]]
+id = "windate"
+names = ["-windate"]
+action = "flag"
+global = true
+help = "Use Windows file dates in hashing"
+
+[[command.options]]
+id = "whirlpool"
+names = ["-whirlpool"]
+action = "flag"
+global = true
+help = "Use Whirlpool"
+
+[[command.options]]
+id = "highway64"
+names = ["-highway64"]
+action = "flag"
+global = true
+help = "Use HighwayHash 64-bit"
+
+[[command.options]]
+id = "highway128"
+names = ["-highway128"]
+action = "flag"
+global = true
+help = "Use HighwayHash 128-bit"
+
+[[command.options]]
+id = "highway256"
+names = ["-highway256"]
+action = "flag"
+global = true
+help = "Use HighwayHash 256-bit"
+
+[[command.options]]
+id = "xxhashb"
+names = ["-xxhashb"]
+action = "flag"
+global = true
+help = "Use the 60+ XXHash variant"
+
+[[command.options]]
+id = "md5b"
+names = ["-md5b"]
+action = "flag"
+global = true
+help = "Use the MD5B variant"
+
+[[command.options]]
+id = "blake3b"
+names = ["-blake3b"]
+action = "flag"
+global = true
+help = "Use the BLAKE3B variant"
+
+[[command.options]]
+id = "sha256b"
+names = ["-sha256b"]
+action = "flag"
+global = true
+help = "Use the SHA256B variant"
+
+[[command.options]]
+id = "sha3b"
+names = ["-sha3b"]
+action = "flag"
+global = true
+help = "Use the SHA3B variant"
+
+[[command.options]]
+id = "xxh3b"
+names = ["-xxh3b"]
+action = "flag"
+global = true
+help = "Use the XXH3B variant"
+
+[[command.options]]
+id = "sha1b"
+names = ["-sha1b"]
+action = "flag"
+global = true
+help = "Use the SHA1B variant"
+
+[[command.options]]
+id = "crc32c"
+names = ["-crc32c"]
+action = "flag"
+global = true
+help = "Use CRC-32C"
+
+[[command.options]]
+id = "wyhash"
+names = ["-wyhash"]
+action = "flag"
+global = true
+help = "Use WyHash"
+
+[[command.options]]
+id = "nilsimsa"
+names = ["-nilsimsa"]
+action = "flag"
+global = true
+help = "Use Nilsimsa similarity hashing"
+
+[[command.options]]
+id = "entropy"
+names = ["-entropy"]
+action = "flag"
+global = true
+help = "Estimate entropy"
+
+[[command.options]]
+id = "quick"
+names = ["-quick"]
+action = "flag"
+global = true
+help = "Use the quick partial hash"
+
+[[command.options]]
+id = "zeta"
+names = ["-zeta"]
+action = "flag"
+global = true
+help = "Use the ZETA partial hash"
+
+[[command.options]]
+id = "zetaenc"
+names = ["-zetaenc"]
+action = "flag"
+global = true
+help = "Use the encrypted ZETA partial hash"
+
+[[command.options]]
+id = "exec_ok"
+names = ["-exec_ok"]
+action = "value"
+value_name = "COMMAND"
+global = true
+help = "Run a command after successful completion"
+
+[[command.options]]
+id = "exec_error"
+names = ["-exec_error"]
+action = "value"
+value_name = "COMMAND"
+global = true
+help = "Run a command after an error"
+
+[[command.options]]
+id = "exec_warn"
+names = ["-exec_warn"]
+action = "value"
+value_name = "COMMAND"
+global = true
+help = "Run a command after a warning"
+
+[[command.options]]
+id = "exec"
+names = ["-exec"]
+action = "value"
+value_name = "COMMAND"
+global = true
+help = "Run an external command"
+
+[[command.options]]
+id = "vss"
+names = ["-vss"]
+action = "flag"
+global = true
+help = "Read files through Windows Volume Shadow Copy"
+
+[[command.options]]
+id = "orderby"
+names = ["-orderby"]
+action = "value"
+value_name = "FIELDS"
+global = true
+help = "Sort by ext, name, full, hash, size, or date"
+
+[[command.options]]
+id = "desc"
+names = ["-desc"]
+action = "flag"
+global = true
+help = "Sort in descending order"
+
+[[command.options]]
+id = "repack"
+names = ["-repack"]
+action = "value"
+value_name = "ARCHIVE"
+global = true
+help = "Extract into a new archive"
+
+[[command.options]]
+id = "threads"
+names = ["-t", "-threads"]
+action = "value"
+value_name = "N"
+global = true
+help = "Set the number of threads"
+
+[[command.options]]
+id = "fragment"
+names = ["-fragment"]
+action = "value"
+value_name = "N"
+global = true
+help = "Set the average fragment size"
+
+[[command.options]]
+id = "method"
+names = ["-m", "-method"]
+action = "value"
+value_name = "METHOD"
+global = true
+help = "Set the compression method"

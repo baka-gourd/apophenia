@@ -1,0 +1,58 @@
+[command]
+name = "sum"
+visible_aliases = ["sha1"]
+description = "Calculate hashes, duplicate files, and cumulative hashes"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "mm"
+names = ["-mm"]
+action = "flag"
+help = "Use memory-mapped files"
+
+[[command.options]]
+id = "rename"
+names = ["-rename"]
+action = "flag"
+help = "Rename files with their hash"
+
+[[command.options]]
+id = "checktxt"
+names = ["-checktxt"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Check hashes against a text file"
+
+[[command.options]]
+id = "hashdeep"
+names = ["-hashdeep"]
+action = "flag"
+help = "Write hashdeep-compatible output"
+
+[[command.options]]
+id = "home"
+names = ["-home"]
+action = "flag"
+help = "Calculate one-level cumulative hashes"
+
+[[command.options]]
+id = "last"
+names = ["-last"]
+action = "flag"
+help = "Hash only the last file"
+
+[[command.options]]
+id = "stdout"
+names = ["-stdout"]
+action = "flag"
+help = "Write hashes to standard output"
+
+[[command.arguments]]
+id = "paths"
+position = 1
+value_name = "PATH"
+multiple = true
+value_hint = "any_path"

@@ -1,0 +1,11 @@
+[command]
+name = "pad"
+description = "Left-pad a number with zeros"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "number"
+position = 1
+value_name = "NUMBER"

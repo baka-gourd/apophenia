@@ -1,0 +1,28 @@
+[command]
+name = "consolidate"
+description = "Merge multipart backup pieces into one archive"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "ARCHIVE"
+value_hint = "file_path"
+help = "Write a new backup file"
+
+[[command.options]]
+id = "destination"
+names = ["-destination"]
+action = "value"
+value_name = "ARCHIVE"
+value_hint = "file_path"
+help = "Copy-rename the backup"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "any_path"

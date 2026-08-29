@@ -1,0 +1,57 @@
+[command]
+name = "ssh"
+description = "Run verb-noun commands against an SSH server"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "host"
+names = ["-host"]
+action = "value"
+value_name = "HOST"
+value_hint = "hostname"
+global = true
+help = "SSH server hostname"
+
+[[command.options]]
+id = "user"
+names = ["-user"]
+action = "value"
+value_name = "USER"
+value_hint = "username"
+global = true
+help = "SSH username"
+
+[[command.options]]
+id = "password"
+names = ["-password"]
+action = "value"
+value_name = "PASSWORD"
+global = true
+help = "SSH password"
+
+[[command.options]]
+id = "port"
+names = ["-port"]
+action = "value"
+value_name = "PORT"
+global = true
+help = "SSH port"
+
+[[command.options]]
+id = "ssh_key"
+names = ["-ssh"]
+action = "value"
+value_name = "KEY"
+value_hint = "file_path"
+global = true
+help = "SSH private key"
+
+[[command.options]]
+id = "remote"
+names = ["-remote"]
+action = "value"
+value_name = "PATH"
+global = true
+help = "Remote path"

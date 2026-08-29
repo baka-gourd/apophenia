@@ -1,0 +1,43 @@
+[command]
+name = "hash"
+description = "Calculate hashes for files and directories"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "mm"
+names = ["-mm"]
+action = "flag"
+help = "Use a memory-mapped file"
+
+[[command.options]]
+id = "stdout"
+names = ["-stdout"]
+action = "flag"
+help = "Write hashes to standard output"
+
+[[command.options]]
+id = "last"
+names = ["-last"]
+action = "flag"
+help = "Hash only the last file"
+
+[[command.options]]
+id = "franzhash"
+names = ["-franzhash"]
+action = "flag"
+help = "Use franzhash"
+
+[[command.options]]
+id = "frugal"
+names = ["-frugal"]
+action = "flag"
+help = "Use a single thread for franzhash"
+
+[[command.arguments]]
+id = "paths"
+position = 1
+value_name = "PATH"
+multiple = true
+value_hint = "any_path"

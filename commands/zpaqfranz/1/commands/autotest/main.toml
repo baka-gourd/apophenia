@@ -1,0 +1,28 @@
+[command]
+name = "autotest"
+description = "Run operational self-tests"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "DIR"
+value_hint = "dir_path"
+help = "Write a dotest script into a directory"
+
+[[command.options]]
+id = "checktxt"
+names = ["-checktxt"]
+action = "value"
+value_name = "DIR"
+value_hint = "dir_path"
+help = "Check test output files in a directory"
+
+[[command.options]]
+id = "hw"
+names = ["-hw"]
+action = "flag"
+help = "Run the hardware test"

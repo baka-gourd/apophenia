@@ -1,0 +1,25 @@
+[command]
+name = "cp"
+description = "Copy files with progress feedback"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "paranoid"
+names = ["-paranoid"]
+action = "flag"
+help = "Choose a unique destination name"
+
+[[command.options]]
+id = "append"
+names = ["-append"]
+action = "flag"
+help = "Append data instead of overwriting"
+
+[[command.arguments]]
+id = "files"
+position = 1
+value_name = "FILE"
+multiple = true
+value_hint = "any_path"

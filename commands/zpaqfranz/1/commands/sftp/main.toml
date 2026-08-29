@@ -1,0 +1,57 @@
+[command]
+name = "sftp"
+description = "Run verb-noun commands against an SFTP server"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "host"
+names = ["-host"]
+action = "value"
+value_name = "HOST"
+value_hint = "hostname"
+global = true
+help = "SFTP server hostname"
+
+[[command.options]]
+id = "user"
+names = ["-user"]
+action = "value"
+value_name = "USER"
+value_hint = "username"
+global = true
+help = "SFTP username"
+
+[[command.options]]
+id = "password"
+names = ["-password"]
+action = "value"
+value_name = "PASSWORD"
+global = true
+help = "SFTP password"
+
+[[command.options]]
+id = "port"
+names = ["-port"]
+action = "value"
+value_name = "PORT"
+global = true
+help = "SFTP port"
+
+[[command.options]]
+id = "ssh"
+names = ["-ssh"]
+action = "value"
+value_name = "KEY"
+value_hint = "file_path"
+global = true
+help = "SSH private key"
+
+[[command.options]]
+id = "bandwidth"
+names = ["-bandwidth"]
+action = "value"
+value_name = "RATE"
+global = true
+help = "Limit transfer speed"

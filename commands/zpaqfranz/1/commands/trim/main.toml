@@ -1,0 +1,20 @@
+[command]
+name = "trim"
+description = "Trim an incomplete archive"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "ARCHIVE"
+value_hint = "file_path"
+help = "Write the trimmed copy here"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "file_path"

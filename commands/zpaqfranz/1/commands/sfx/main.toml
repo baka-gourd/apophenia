@@ -1,0 +1,20 @@
+[command]
+name = "sfx"
+description = "Create or inspect a self-extracting executable"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Extract the archive from an executable"
+
+[[command.arguments]]
+id = "archive_or_exe"
+position = 1
+value_name = "FILE"
+value_hint = "file_path"

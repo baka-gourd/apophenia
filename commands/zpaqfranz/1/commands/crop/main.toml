@@ -1,0 +1,20 @@
+[command]
+name = "crop"
+description = "Discard recent archive versions"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "ARCHIVE"
+value_hint = "file_path"
+help = "Write a reduced archive"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "file_path"

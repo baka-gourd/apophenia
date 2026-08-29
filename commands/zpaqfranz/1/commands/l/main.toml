@@ -1,0 +1,103 @@
+[command]
+name = "l"
+description = "List archive contents"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "PATH"
+value_hint = "any_path"
+help = "Rename paths in the output"
+
+[[command.options]]
+id = "attr"
+names = ["-attr"]
+action = "flag"
+help = "Show file attributes"
+
+[[command.options]]
+id = "terse"
+names = ["-terse"]
+action = "flag"
+help = "Use fixed-size script-aware output"
+
+[[command.options]]
+id = "nodel"
+names = ["-nodel"]
+action = "flag"
+help = "Hide deleted files"
+
+[[command.options]]
+id = "csv"
+names = ["-csv"]
+action = "value"
+value_name = "DELIMITER"
+help = "Use CSV output"
+
+[[command.options]]
+id = "csvhf"
+names = ["-csvhf"]
+action = "value"
+value_name = "DELIMITER"
+help = "Set the CSV header and footer delimiter"
+
+[[command.options]]
+id = "tar"
+names = ["-tar"]
+action = "flag"
+help = "Show POSIX metadata"
+
+[[command.options]]
+id = "home"
+names = ["-home"]
+action = "flag"
+help = "Show one-level cumulative data"
+
+[[command.options]]
+id = "ads"
+names = ["-ads"]
+action = "flag"
+help = "Skip the NTFS file list"
+
+[[command.options]]
+id = "fast"
+names = ["-fast"]
+action = "flag"
+help = "Use the stored fast file list"
+
+[[command.options]]
+id = "date"
+names = ["-date"]
+action = "flag"
+help = "Show creation dates"
+
+[[command.options]]
+id = "stdout"
+names = ["-stdout"]
+action = "flag"
+help = "Show fragment ordering information"
+
+[[command.options]]
+id = "range"
+names = ["-range"]
+action = "value"
+value_name = "RANGE"
+help = "Select archive versions"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "file_path"
+
+[[command.arguments]]
+id = "paths"
+position = 2
+value_name = "PATH"
+multiple = true
+last = true
+value_hint = "any_path"

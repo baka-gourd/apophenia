@@ -1,0 +1,39 @@
+[command]
+name = "versum"
+description = "Double-check hashes in a hash list or archive"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "ARCHIVE"
+value_hint = "file_path"
+help = "Test against hashes stored in this archive"
+
+[[command.options]]
+id = "hashdeep"
+names = ["-hashdeep"]
+action = "flag"
+help = "Use hashdeep input format"
+
+[[command.options]]
+id = "checktxt"
+names = ["-checktxt"]
+action = "flag"
+help = "Use an MD5 text file"
+
+[[command.options]]
+id = "fasttxt"
+names = ["-fasttxt"]
+action = "flag"
+help = "Use a CRC-32 text file"
+
+[[command.arguments]]
+id = "paths"
+position = 1
+value_name = "PATH"
+multiple = true
+value_hint = "any_path"

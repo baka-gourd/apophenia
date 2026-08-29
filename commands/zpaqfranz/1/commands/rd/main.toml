@@ -1,0 +1,13 @@
+[command]
+name = "rd"
+description = "Remove a directory on Windows"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "directories"
+position = 1
+value_name = "DIR"
+multiple = true
+value_hint = "dir_path"

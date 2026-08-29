@@ -1,0 +1,21 @@
+[command]
+name = "1on1"
+description = "Deduplicate one folder against another"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "deleteinto"
+names = ["-deleteinto"]
+action = "value"
+value_name = "DIR"
+help = "Delete corresponding files found in this directory"
+
+[[command.arguments]]
+id = "folder"
+position = 1
+value_name = "DIR"
+multiple = true
+value_hint = "dir_path"
+help = "Folders to compare"

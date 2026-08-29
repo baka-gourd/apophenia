@@ -1,0 +1,20 @@
+[command]
+name = "sync"
+description = "Compare archive contents with filesystem folders"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "file_path"
+
+[[command.arguments]]
+id = "directories"
+position = 2
+value_name = "DIR"
+multiple = true
+last = true
+value_hint = "dir_path"

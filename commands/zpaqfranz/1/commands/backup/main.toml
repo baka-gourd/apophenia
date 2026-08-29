@@ -1,0 +1,44 @@
+[command]
+name = "backup"
+description = "Create a multipart-managed backup"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "backupxxh3"
+names = ["-backupxxh3"]
+action = "flag"
+help = "Store XXH3 instead of MD5"
+
+[[command.options]]
+id = "backupzeta"
+names = ["-backupzeta"]
+action = "flag"
+help = "Store ZETA instead of MD5"
+
+[[command.options]]
+id = "tmp"
+names = ["-tmp"]
+action = "flag"
+help = "Use .tmp while the multipart archive is running"
+
+[[command.options]]
+id = "notrim"
+names = ["-notrim"]
+action = "flag"
+help = "Disable automatic trimming"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "any_path"
+
+[[command.arguments]]
+id = "files"
+position = 2
+value_name = "FILE"
+multiple = true
+last = true
+value_hint = "any_path"

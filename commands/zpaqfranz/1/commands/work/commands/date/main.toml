@@ -1,0 +1,11 @@
+[command]
+name = "date"
+description = "Display the current date or datetime"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "format"
+position = 1
+value_name = "FORMAT"

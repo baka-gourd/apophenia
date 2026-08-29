@@ -1,0 +1,12 @@
+[command]
+name = "collision"
+description = "Inspect an archive for SHA-1 collisions"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "any_path"

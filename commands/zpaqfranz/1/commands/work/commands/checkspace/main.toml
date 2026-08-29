@@ -1,0 +1,13 @@
+[command]
+name = "checkspace"
+description = "Check whether enough free space is available"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "paths"
+position = 1
+value_name = "PATH_OR_SIZE"
+multiple = true
+value_hint = "any_path"

@@ -1,0 +1,24 @@
+[command]
+name = "n"
+description = "Keep the newest matching files in a folder"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "order_date"
+names = ["/od"]
+action = "flag"
+help = "Order by date"
+
+[[command.options]]
+id = "order_name"
+names = ["/on"]
+action = "flag"
+help = "Order by name"
+
+[[command.arguments]]
+id = "pattern"
+position = 1
+value_name = "PATTERN"
+value_hint = "any_path"

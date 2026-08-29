@@ -1,0 +1,6 @@
+[command]
+name = "shutdown"
+description = "Try to shut down the computer"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true

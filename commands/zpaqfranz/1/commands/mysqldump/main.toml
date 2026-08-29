@@ -1,0 +1,50 @@
+[command]
+name = "mysqldump"
+description = "Dump MySQL or MariaDB databases into an archive"
+disable_version_flag = true
+disable_help_subcommand = true
+disable_help_flag = true
+
+[[command.options]]
+id = "bin"
+names = ["-bin"]
+action = "value"
+value_name = "DIR"
+value_hint = "dir_path"
+help = "Directory containing the database tools"
+
+[[command.options]]
+id = "mysql_user"
+names = ["-u"]
+action = "value"
+value_name = "USER"
+value_hint = "username"
+help = "Database username"
+
+[[command.options]]
+id = "mysql_password"
+names = ["-p"]
+action = "value"
+value_name = "PASSWORD"
+help = "Database password"
+
+[[command.options]]
+id = "mysql_host"
+names = ["-h"]
+action = "value"
+value_name = "HOST"
+value_hint = "hostname"
+help = "Database host"
+
+[[command.options]]
+id = "mysql_port"
+names = ["-P"]
+action = "value"
+value_name = "PORT"
+help = "Database port"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "file_path"

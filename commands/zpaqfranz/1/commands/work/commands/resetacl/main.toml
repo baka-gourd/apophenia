@@ -1,0 +1,12 @@
+[command]
+name = "resetacl"
+description = "Revert a Windows ACL to administrators"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "path"
+position = 1
+value_name = "PATH"
+value_hint = "any_path"

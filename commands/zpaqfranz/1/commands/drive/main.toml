@@ -1,0 +1,7 @@
+[command]
+name = "drive"
+visible_aliases = ["drives"]
+description = "Show available Windows drives"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true

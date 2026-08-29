@@ -1,0 +1,353 @@
+[command]
+name = "a"
+description = "Add or append files to an archive"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "test"
+names = ["-test"]
+action = "flag"
+help = "Run a post-add test"
+
+[[command.options]]
+id = "paranoid"
+names = ["-paranoid"]
+action = "flag"
+help = "Check files with matching size and timestamp but different hashes"
+
+[[command.options]]
+id = "copy"
+names = ["-copy"]
+action = "value"
+value_name = "DIR"
+value_hint = "dir_path"
+help = "Make a second copy of the written data"
+
+[[command.options]]
+id = "freeze"
+names = ["-freeze"]
+action = "value"
+value_name = "DIR"
+value_hint = "dir_path"
+help = "Move the archive when it exceeds its size limit"
+
+[[command.options]]
+id = "stdin"
+names = ["-stdin"]
+action = "flag"
+help = "Read input data from stdin"
+
+[[command.options]]
+id = "stdout"
+names = ["-stdout"]
+action = "flag"
+help = "Write a non-deduplicated file to stdout"
+
+[[command.options]]
+id = "checktxt"
+names = ["-checktxt"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Write or check an MD5 text file"
+
+[[command.options]]
+id = "buffer"
+names = ["-buffer"]
+action = "value"
+value_name = "BYTES"
+help = "Set the input buffer size"
+
+[[command.options]]
+id = "hashdeep"
+names = ["-hashdeep"]
+action = "flag"
+help = "Write a hashdeep-compatible file list"
+
+[[command.options]]
+id = "fasttxt"
+names = ["-fasttxt"]
+action = "flag"
+help = "Write a CRC-32 text file"
+
+[[command.options]]
+id = "home"
+names = ["-home"]
+action = "flag"
+help = "Create one archive per folder"
+
+[[command.options]]
+id = "collision"
+names = ["-collision"]
+action = "flag"
+help = "Check for SHA-1 collisions"
+
+[[command.options]]
+id = "chunk"
+names = ["-chunk"]
+action = "value"
+value_name = "BYTES"
+help = "Split the output into chunks"
+
+[[command.options]]
+id = "sfx"
+names = ["-sfx"]
+action = "value"
+value_name = "EXE"
+value_hint = "file_path"
+help = "Create a self-extracting executable"
+
+[[command.options]]
+id = "sfxto"
+names = ["-sfxto"]
+action = "value"
+value_name = "DIR"
+value_hint = "dir_path"
+help = "Set the SFX extraction directory"
+
+[[command.options]]
+id = "sfxforce"
+names = ["-sfxforce"]
+action = "flag"
+help = "Put -force into the SFX module"
+
+[[command.options]]
+id = "sfxnot"
+names = ["-sfxnot"]
+action = "flag"
+help = "Put -not into the SFX module"
+
+[[command.options]]
+id = "sfxonly"
+names = ["-sfxonly"]
+action = "flag"
+help = "Put -only into the SFX module"
+
+[[command.options]]
+id = "sfxuntil"
+names = ["-sfxuntil"]
+action = "value"
+value_name = "VERSION"
+help = "Put -until into the SFX module"
+
+[[command.options]]
+id = "ads"
+names = ["-ads"]
+action = "flag"
+help = "Store the file list in NTFS ADS"
+
+[[command.options]]
+id = "image"
+names = ["-image"]
+action = "flag"
+help = "Create a raw drive image"
+
+[[command.options]]
+id = "fast"
+names = ["-fast"]
+action = "flag"
+help = "Store the file list inside the archive"
+
+[[command.options]]
+id = "ignore"
+names = ["-ignore"]
+action = "flag"
+help = "Ignore file access errors"
+
+[[command.options]]
+id = "pause"
+names = ["-pause"]
+action = "flag"
+help = "Wait for a key press after running"
+
+[[command.options]]
+id = "ifexist"
+names = ["-ifexist"]
+action = "value"
+value_name = "DIR"
+value_hint = "dir_path"
+help = "Abort if a directory does not exist"
+
+[[command.options]]
+id = "thunderbird"
+names = ["-thunderbird"]
+action = "flag"
+help = "Include Thunderbird application data"
+
+[[command.options]]
+id = "date"
+names = ["-date"]
+action = "flag"
+help = "Store creation dates"
+
+[[command.options]]
+id = "frugal"
+names = ["-frugal"]
+action = "flag"
+help = "Use less RAM"
+
+[[command.options]]
+id = "stat"
+names = ["-stat"]
+action = "flag"
+help = "Show external files added or updated"
+
+[[command.options]]
+id = "external"
+names = ["-external"]
+action = "value"
+value_name = "COMMAND"
+help = "Run a command before adding files"
+
+[[command.options]]
+id = "touch"
+names = ["-touch"]
+action = "value"
+value_name = "DATETIME"
+help = "Set the stored date for every file"
+
+[[command.options]]
+id = "input"
+names = ["-input"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Load files to add from a text file"
+
+[[command.options]]
+id = "destination"
+names = ["-destination"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Load the output destination from a text file"
+
+[[command.options]]
+id = "errorlog"
+names = ["-errorlog"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Write errors to a file"
+
+[[command.options]]
+id = "ht"
+names = ["-ht"]
+action = "flag"
+help = "Enable HyperThread"
+
+[[command.options]]
+id = "notrim"
+names = ["-notrim"]
+action = "flag"
+help = "Disable automatic trimming"
+
+[[command.options]]
+id = "noonedrive"
+names = ["-noonedrive"]
+action = "flag"
+help = "Do not add OneDrive placeholders"
+
+[[command.options]]
+id = "monitor"
+names = ["-monitor"]
+action = "flag"
+help = "Turn off the monitor"
+
+[[command.options]]
+id = "slow"
+names = ["-slow"]
+action = "flag"
+help = "Reduce CPU power"
+
+[[command.options]]
+id = "shutdown"
+names = ["-shutdown"]
+action = "flag"
+help = "Shut down the computer after completion"
+
+[[command.options]]
+id = "ntfs"
+names = ["-ntfs"]
+action = "flag"
+help = "Scan an NTFS drive"
+
+[[command.options]]
+id = "append"
+names = ["-append"]
+action = "flag"
+help = "Use append-only mode"
+
+[[command.options]]
+id = "appendoutput"
+names = ["-appendoutput"]
+action = "flag"
+help = "Append to the output file"
+
+[[command.options]]
+id = "writeonconsole"
+names = ["-writeonconsole"]
+action = "flag"
+help = "Also write output to stderr"
+
+[[command.options]]
+id = "checksize"
+names = ["-checksize"]
+action = "value"
+value_name = "BYTES"
+help = "Require enough free space"
+
+[[command.options]]
+id = "nodelete"
+names = ["-nodelete"]
+action = "flag"
+help = "Store all files without deleting duplicates"
+
+[[command.options]]
+id = "debug2"
+names = ["-debug2"]
+action = "flag"
+help = "Show detailed debugging information"
+
+[[command.options]]
+id = "debug3"
+names = ["-debug3"]
+action = "flag"
+help = "Show very detailed debugging information"
+
+[[command.options]]
+id = "zero"
+names = ["-zero"]
+action = "flag"
+help = "Add files as zero-filled data"
+
+[[command.options]]
+id = "findzpaq"
+names = ["-findzpaq"]
+action = "flag"
+help = "Search every drive for the matching archive"
+
+[[command.options]]
+id = "checkspace"
+names = ["-checkspace"]
+action = "value"
+value_name = "BYTES"
+help = "Require enough free space"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "any_path"
+help = "Archive to create"
+
+[[command.arguments]]
+id = "files"
+position = 2
+value_name = "FILE"
+multiple = true
+last = true
+value_hint = "any_path"
+help = "Files or folders to add"

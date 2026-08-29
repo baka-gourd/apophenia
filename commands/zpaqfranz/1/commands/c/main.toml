@@ -1,0 +1,14 @@
+[command]
+name = "c"
+description = "Compare a master directory with slave directories"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "directory"
+position = 1
+value_name = "DIR"
+multiple = true
+value_hint = "dir_path"
+help = "Master directory followed by slave directories"

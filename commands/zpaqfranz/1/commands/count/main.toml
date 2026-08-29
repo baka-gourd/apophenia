@@ -1,0 +1,13 @@
+[command]
+name = "count"
+description = "Count strings inside files"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.arguments]]
+id = "files"
+position = 1
+value_name = "FILE"
+multiple = true
+value_hint = "any_path"

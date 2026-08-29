@@ -1,0 +1,13 @@
+[command]
+name = "work"
+description = "Execute verb-noun utility commands"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "terse"
+names = ["-terse"]
+action = "flag"
+global = true
+help = "Use concise output"

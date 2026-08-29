@@ -1,0 +1,12 @@
+[command]
+name = "pause"
+description = "Wait for input from stdin"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "terse"
+names = ["-terse"]
+action = "flag"
+help = "Use the terse prompt"

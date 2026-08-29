@@ -1,0 +1,44 @@
+[command]
+name = "w"
+description = "Extract or test an archive in chunks"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "DIR"
+value_hint = "dir_path"
+help = "Write chunks into this empty directory"
+
+[[command.options]]
+id = "ramdisk"
+names = ["-ramdisk"]
+action = "flag"
+help = "Use a RAM disk"
+
+[[command.options]]
+id = "frugal"
+names = ["-frugal"]
+action = "flag"
+help = "Use less RAM"
+
+[[command.options]]
+id = "test"
+names = ["-test"]
+action = "flag"
+help = "Do not write to the media"
+
+[[command.options]]
+id = "paranoid"
+names = ["-paranoid"]
+action = "flag"
+help = "Delete extracted files only after verification"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "file_path"

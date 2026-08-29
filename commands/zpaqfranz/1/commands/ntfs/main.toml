@@ -1,0 +1,20 @@
+[command]
+name = "ntfs"
+description = "Restore an NTFS image to a raw image"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Write the full-size raw image here"
+
+[[command.arguments]]
+id = "image"
+position = 1
+value_name = "IMAGE"
+value_hint = "file_path"

@@ -1,0 +1,46 @@
+[command]
+name = "t"
+description = "Test an archive"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "to"
+names = ["-to"]
+action = "value"
+value_name = "DIR"
+value_hint = "dir_path"
+help = "Extract to a temporary directory for paranoid checking"
+
+[[command.options]]
+id = "paranoid"
+names = ["-paranoid"]
+action = "flag"
+help = "Extract and compare every file"
+
+[[command.options]]
+id = "collision"
+names = ["-collision"]
+action = "flag"
+help = "Test for hash collisions"
+
+[[command.options]]
+id = "debug6"
+names = ["-debug6"]
+action = "flag"
+help = "Force a CRC-32 error"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "any_path"
+
+[[command.arguments]]
+id = "paths"
+position = 2
+value_name = "PATH"
+multiple = true
+last = true
+value_hint = "any_path"

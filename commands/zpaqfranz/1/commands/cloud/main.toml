@@ -1,0 +1,139 @@
+[command]
+name = "cloud"
+description = "Upload an archive to cloud storage over SFTP"
+disable_help_flag = true
+disable_version_flag = true
+disable_help_subcommand = true
+
+[[command.options]]
+id = "host"
+names = ["-host"]
+action = "value"
+value_name = "HOST"
+value_hint = "hostname"
+help = "SFTP server hostname"
+
+[[command.options]]
+id = "user"
+names = ["-user"]
+action = "value"
+value_name = "USER"
+value_hint = "username"
+help = "SFTP username"
+
+[[command.options]]
+id = "password"
+names = ["-password"]
+action = "value"
+value_name = "PASSWORD"
+help = "SFTP password"
+
+[[command.options]]
+id = "ssh"
+names = ["-ssh"]
+action = "value"
+value_name = "KEY"
+value_hint = "file_path"
+help = "SSH private key"
+
+[[command.options]]
+id = "remote"
+names = ["-remote"]
+action = "value"
+value_name = "PATH"
+help = "Remote destination path"
+
+[[command.options]]
+id = "port"
+names = ["-port"]
+action = "value"
+value_name = "PORT"
+help = "SFTP port"
+
+[[command.options]]
+id = "bandwidth"
+names = ["-bandwidth"]
+action = "value"
+value_name = "RATE"
+help = "Limit upload speed"
+
+[[command.options]]
+id = "stat"
+names = ["-stat"]
+action = "flag"
+help = "List changed filenames in the log"
+
+[[command.options]]
+id = "test"
+names = ["-test"]
+action = "flag"
+help = "Test the archive before upload"
+
+[[command.options]]
+id = "onlyupload"
+names = ["-onlyupload"]
+action = "flag"
+help = "Continue uploading only"
+
+[[command.options]]
+id = "md5deep"
+names = ["-md5deep"]
+action = "flag"
+help = "Run a deep MD5 remote test"
+
+[[command.options]]
+id = "sha1deep"
+names = ["-sha1deep"]
+action = "flag"
+help = "Run a deep SHA-1 remote test"
+
+[[command.options]]
+id = "sha256deep"
+names = ["-sha256deep"]
+action = "flag"
+help = "Run a deep SHA-256 remote test"
+
+[[command.options]]
+id = "mailfull"
+names = ["-mailfull"]
+action = "value"
+value_name = "EMAIL"
+value_hint = "email_address"
+help = "Full report email address"
+
+[[command.options]]
+id = "mailprivacy"
+names = ["-mailprivacy"]
+action = "value"
+value_name = "EMAIL"
+value_hint = "email_address"
+help = "Privacy report email address"
+
+[[command.options]]
+id = "maila"
+names = ["-maila"]
+action = "value"
+value_name = "PROGRAM"
+value_hint = "executable_path"
+help = "Email program path"
+
+[[command.options]]
+id = "customer"
+names = ["-customer"]
+action = "value"
+value_name = "TEXT"
+help = "Email subject text"
+
+[[command.arguments]]
+id = "archive"
+position = 1
+value_name = "ARCHIVE"
+value_hint = "any_path"
+
+[[command.arguments]]
+id = "files"
+position = 2
+value_name = "FILE"
+multiple = true
+last = true
+value_hint = "any_path"
