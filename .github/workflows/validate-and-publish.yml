@@ -1,0 +1,92 @@
+name: Validate and publish completion database
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate manifests and Rust project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Set up Tombi
+        uses: tombi-toml/setup-tombi@v1.4.1
+
+      - name: Check TOML manifests
+        run: tombi lint
+
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      - name: Run tests
+        run: cargo test --locked
+
+      - name: Run Clippy
+        run: cargo clippy --locked --all-targets -- -D warnings
+
+      - name: Validate database build
+        run: cargo run --locked -- build --source commands --output dist/apophenia.db
+
+      - name: Check database artifact
+        run: test -s dist/apophenia.db
+
+  publish:
+    name: Publish completion database
+    if: github.event_name == 'workflow_dispatch'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build database
+        run: cargo run --locked -- build --source commands --output dist/apophenia.db
+
+      - name: Update release/database
+        shell: bash
+        env:
+          TARGET_BRANCH: release/database
+        run: |
+          set -euo pipefail
+
+          git fetch origin "$TARGET_BRANCH"
+          publish_dir="$RUNNER_TEMP/apophenia-release-database"
+          git worktree add --detach "$publish_dir" "origin/$TARGET_BRANCH"
+
+          cleanup() {
+            cd "$GITHUB_WORKSPACE"
+            git worktree remove --force "$publish_dir"
+          }
+          trap cleanup EXIT
+
+          cp dist/apophenia.db "$publish_dir/apophenia.db"
+          cd "$publish_dir"
+
+          git add apophenia.db
+          if git diff --cached --quiet -- apophenia.db; then
+            echo "apophenia.db is already up to date"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: update completion database"
+          git push origin "HEAD:$TARGET_BRANCH"
