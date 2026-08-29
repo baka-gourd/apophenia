@@ -96,6 +96,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Check out tagged source history
+        uses: actions/checkout@v4
+
       - name: Download binary artifacts
         uses: actions/download-artifact@v4
         with:
@@ -103,26 +106,35 @@ jobs:
           path: release-assets
           merge-multiple: true
 
-      - name: Create or update GitHub Release
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          shopt -s nullglob
-          assets=(release-assets/*)
-          if ((${#assets[@]} == 0)); then
-            echo "No release assets were produced" >&2
-            exit 1
-          fi
+      - name: Update CHANGELOG
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ github.ref_name }}
+          useGitmojis: false
+          includeInvalidCommits: true
+          reverseOrder: true
+          excludeTypes: style,build
+          writeToFile: true
+        continue-on-error: true
 
-          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" "${assets[@]}" \
-              --repo "$GITHUB_REPOSITORY" --clobber
-          else
-            gh release create "$GITHUB_REF_NAME" "${assets[@]}" \
-              --repo "$GITHUB_REPOSITORY" \
-              --title "$GITHUB_REF_NAME" \
-              --generate-notes \
-              --verify-tag
-          fi
+      - name: Create or update GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          artifacts: "release-assets/*"
+          artifactErrorsFailBuild: true
+          makeLatest: true
+          allowUpdates: true
+          body: ${{ steps.changelog.outputs.changes }}
+          token: ${{ github.token }}
+
+      - name: Commit CHANGELOG.md
+        if: hashFiles('CHANGELOG.md') != ''
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          branch: main
+          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
+          file_pattern: CHANGELOG.md
