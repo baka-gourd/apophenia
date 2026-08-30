@@ -1,0 +1,18 @@
+[command]
+name = "run"
+description = "启动 web server"
+
+[[command.options]]
+id = "host"
+names = ["--host"]
+action = "value"
+value_name = "HOST"
+value_hint = "hostname"
+help = "监听地址"
+
+[[command.options]]
+id = "port"
+names = ["--port"]
+action = "value"
+value_name = "PORT"
+help = "端口号"

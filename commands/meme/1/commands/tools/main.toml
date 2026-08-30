@@ -1,0 +1,4 @@
+[command]
+name = "tools"
+description = "工具箱"
+subcommand_required = true

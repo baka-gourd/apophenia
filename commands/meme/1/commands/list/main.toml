@@ -1,0 +1,3 @@
+[command]
+name = "list"
+description = "查看所有可用表情"

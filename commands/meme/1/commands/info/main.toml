@@ -1,0 +1,50 @@
+[command]
+name = "info"
+description = "查看表情详情"
+
+[[command.arguments]]
+id = "key"
+position = 1
+value_name = "KEY"
+required = true
+possible_values = [
+  "5000choyen", "abstinence", "ace_attorney_dialog", "acg_entrance", "add_chaos", "addiction", "alike", "alipay",
+  "always", "always_like", "anan_say", "anti_kidnap", "anya_suki", "applaud", "arona_throw", "ascension",
+  "ask", "atri_pillow", "ayachi_holdsign", "ba_say", "back_to_work", "backflip", "bad_news", "batitle",
+  "beat_head", "beat_up", "blamed_mahiro", "blood_pressure", "bocchi_draft", "bronya_holdsign", "bubble_tea", "call_110",
+  "capoo_draw", "capoo_point", "capoo_rip", "capoo_rub", "capoo_say", "capoo_stew", "capoo_strike", "captain",
+  "caused_by_this", "certificate", "chanshenzi", "charpic", "chase_train", "china_flag", "chino_throw", "clauvio_twist",
+  "clown", "clown_mask", "confuse", "coupon", "cover_face", "crawl", "cyan", "daynight",
+  "decent_kiss", "dianzhongdian", "dinosaur", "distracted", "divorce", "dog_dislike", "dog_of_vtb", "dont_go_near",
+  "dont_press", "dont_touch", "doraemon_say", "douyin", "eat", "elysia_holdsign", "emperor_dragon", "erised_mirror",
+  "fade_away", "fanatic", "father_work", "fencing", "fight_with_sunuo", "fill_head", "find_chips", "firefly_holdsign",
+  "flash_blind", "flick", "flush", "fogging", "follow", "forbid", "frieren_take", "funny_mirror",
+  "garbage", "genshin_eat", "genshin_start", "good_news", "google", "google_captcha", "gorilla_throw", "grab",
+  "grab_both_hands", "guichu", "gun", "hammer", "haruhi_raise", "head_butt", "high_eq", "hit_screen",
+  "hold_grudge", "hold_tight", "hug", "hug_leg", "hutao_bite", "imprison", "incivilization", "intel_inside",
+  "interview", "jerry_stare", "jiamianqishi", "jiji_king", "jinhsi", "jiubingfufa", "jiujiu", "jump",
+  "kaleidoscope", "karyl_point", "keep_away", "keep_your_money", "kick_ball", "kirby_hammer", "kiss", "klee_eat",
+  "knock", "kokona_seal", "konata_watch", "learn", "left_right_jump", "let_me_in", "lick_candy", "lim_x_0",
+  "listen_music", "little_angel", "loading", "look_flat", "look_this_icon", "loop", "lost_dog", "love_you",
+  "luotianyi_need", "luotianyi_say", "luoyonghao_say", "luxun_say", "mahiro_readbook", "maikease", "maimai_awaken", "maimai_join",
+  "make_friend", "marriage", "meteor", "mihoyo", "mourning", "murmur", "my_friend_say", "my_opinion",
+  "my_wife", "nahida_bite", "name_generator", "need", "nekoha_holdsign", "nihaosaoa", "nijika_holdsign", "no_response",
+  "nokia", "note_for_leave", "operator_generator", "oshi_no_ko", "osu", "out", "overtime", "p5letter",
+  "paint", "painter", "panda_dragon_figure", "pass_the_buck", "pat", "pepe_raise", "perfect", "petpet",
+  "pinch", "pixelate", "pjsk", "plana_eat", "play_baseball", "play_basketball", "play_game", "play_together",
+  "police", "policeman", "pornhub", "potato", "pound", "praise", "printing", "prpr",
+  "psyduck", "punch", "pyramid", "qiegewala", "raise_image", "raise_sign", "read_book", "remote_control",
+  "repeat", "rip", "rip_angrily", "rip_clothes", "rise_dead", "roll", "rotate_3d", "rub",
+  "run", "run_away", "safe_sense", "saimin_app", "scratch_head", "scratchcard", "scroll", "seal",
+  "sekaiichi_kawaii", "shake_head", "shiroko_pero", "shishilani", "shock", "shuifandui", "shutup", "sit_still",
+  "slap", "slogan", "smash", "sold_out", "speechless", "sphere_rotate", "spider", "stare_at_you",
+  "steam_message", "step_on", "stew", "stickman_dancing", "subject3", "suck", "support", "swirl_turn",
+  "symmetric", "tankuku_raisesign", "taunt", "teach", "tease", "telescope", "thermometer_gun", "think_what",
+  "this_chicken", "throw", "throw_gif", "thump", "thump_wildly", "tightly", "time_to_go", "together",
+  "tom_tease", "tomb_yeah", "trance", "trolley", "turn", "twist", "universal", "upside_down",
+  "vibrate", "wakeup", "wallpaper", "walnut_pad", "walnut_zoom", "wangjingze", "washer", "wave",
+  "wechat_pay", "weisuoyuwei", "what_he_wants", "what_i_want_to_do", "why_at_me", "why_have_hands", "windmill_turn", "wish_fail",
+  "wooden_fish", "worship", "wujing", "wunian", "wuyage", "yalidaye", "yeshu", "you_dont_get",
+  "you_should_call", "your_new_years_eve", "youtube", "zengxiaoxian"
+]
+help = "表情名"

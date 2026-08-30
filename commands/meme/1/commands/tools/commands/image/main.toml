@@ -1,0 +1,44 @@
+[command]
+name = "image"
+description = "图片操作"
+subcommand_required = true
+
+[[command.subcommand_candidates]]
+value = "inspect"
+help = "查看图片信息"
+
+[[command.subcommand_candidates]]
+value = "flip_h"
+help = "水平翻转"
+
+[[command.subcommand_candidates]]
+value = "flip_v"
+help = "竖直翻转"
+
+[[command.subcommand_candidates]]
+value = "rotate"
+help = "旋转"
+
+[[command.subcommand_candidates]]
+value = "resize"
+help = "调整大小"
+
+[[command.subcommand_candidates]]
+value = "crop"
+help = "裁剪"
+
+[[command.subcommand_candidates]]
+value = "grayscale"
+help = "灰度化"
+
+[[command.subcommand_candidates]]
+value = "invert"
+help = "反色"
+
+[[command.subcommand_candidates]]
+value = "merge_h"
+help = "水平拼接"
+
+[[command.subcommand_candidates]]
+value = "merge_v"
+help = "竖直拼接"

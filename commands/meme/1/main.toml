@@ -1,0 +1,27 @@
+schema_version = 1
+
+[command]
+name = "meme"
+binary = "meme"
+description = "表情包制作"
+supported_versions = ["0.2.3"]
+version_commands = [["--version"]]
+subcommand_required = true
+disable_help_flag = true
+
+[[command.version_preprocessors]]
+engine = "regex"
+pattern = "(?s)^meme (?P<version>[^[:space:]]+).*$"
+replace = "$version"
+
+[[command.options]]
+id = "help"
+names = ["-h", "--help"]
+action = "help"
+help = "Print help"
+
+[[command.options]]
+id = "version"
+names = ["-V", "--version"]
+action = "flag"
+help = "Print version"

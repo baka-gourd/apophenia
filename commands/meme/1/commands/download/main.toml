@@ -1,0 +1,11 @@
+[command]
+name = "download"
+description = "下载表情包所需的资源"
+
+[[command.options]]
+id = "url"
+names = ["--url"]
+action = "value"
+value_name = "URL"
+value_hint = "url"
+help = "资源链接"

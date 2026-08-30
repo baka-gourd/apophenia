@@ -1,0 +1,1504 @@
+[command]
+name = "generate"
+description = "制作表情"
+subcommand_required = true
+
+
+[[command.subcommand_candidates]]
+value = "5000choyen"
+help = "5000兆"
+
+
+[[command.subcommand_candidates]]
+value = "abstinence"
+help = "戒导"
+
+
+[[command.subcommand_candidates]]
+value = "ace_attorney_dialog"
+help = "逆转裁判气泡"
+
+
+[[command.subcommand_candidates]]
+value = "acg_entrance"
+help = "二次元入口"
+
+
+[[command.subcommand_candidates]]
+value = "add_chaos"
+help = "添乱/给社会添乱"
+
+
+[[command.subcommand_candidates]]
+value = "addiction"
+help = "上瘾/毒瘾发作"
+
+
+[[command.subcommand_candidates]]
+value = "alike"
+help = "一样"
+
+
+[[command.subcommand_candidates]]
+value = "alipay"
+help = "支付宝支付"
+
+
+[[command.subcommand_candidates]]
+value = "always"
+help = "一直"
+
+
+[[command.subcommand_candidates]]
+value = "always_like"
+help = "我永远喜欢"
+
+
+[[command.subcommand_candidates]]
+value = "anan_say"
+help = "安安说"
+
+
+[[command.subcommand_candidates]]
+value = "anti_kidnap"
+help = "防诱拐"
+
+
+[[command.subcommand_candidates]]
+value = "anya_suki"
+help = "阿尼亚喜欢"
+
+
+[[command.subcommand_candidates]]
+value = "applaud"
+help = "鼓掌"
+
+
+[[command.subcommand_candidates]]
+value = "arona_throw"
+help = "阿罗娜扔"
+
+
+[[command.subcommand_candidates]]
+value = "ascension"
+help = "升天"
+
+
+[[command.subcommand_candidates]]
+value = "ask"
+help = "问问"
+
+
+[[command.subcommand_candidates]]
+value = "atri_pillow"
+help = "亚托莉枕头"
+
+
+[[command.subcommand_candidates]]
+value = "ayachi_holdsign"
+help = "宁宁举牌"
+
+
+[[command.subcommand_candidates]]
+value = "ba_say"
+help = "ba说"
+
+
+[[command.subcommand_candidates]]
+value = "back_to_work"
+help = "继续干活/打工人"
+
+
+[[command.subcommand_candidates]]
+value = "backflip"
+help = "后空翻"
+
+
+[[command.subcommand_candidates]]
+value = "bad_news"
+help = "悲报"
+
+
+[[command.subcommand_candidates]]
+value = "batitle"
+help = "蔚蓝档案标题/batitle"
+
+
+[[command.subcommand_candidates]]
+value = "beat_head"
+help = "拍头"
+
+
+[[command.subcommand_candidates]]
+value = "beat_up"
+help = "揍"
+
+
+[[command.subcommand_candidates]]
+value = "blamed_mahiro"
+help = "真寻挨骂"
+
+
+[[command.subcommand_candidates]]
+value = "blood_pressure"
+help = "高血压"
+
+
+[[command.subcommand_candidates]]
+value = "bocchi_draft"
+help = "波奇手稿"
+
+
+[[command.subcommand_candidates]]
+value = "bronya_holdsign"
+help = "布洛妮娅举牌/大鸭鸭举牌"
+
+
+[[command.subcommand_candidates]]
+value = "bubble_tea"
+help = "奶茶"
+
+
+[[command.subcommand_candidates]]
+value = "call_110"
+help = "遇到困难请拨打"
+
+
+[[command.subcommand_candidates]]
+value = "capoo_draw"
+help = "咖波画"
+
+
+[[command.subcommand_candidates]]
+value = "capoo_point"
+help = "咖波指"
+
+
+[[command.subcommand_candidates]]
+value = "capoo_rip"
+help = "咖波撕"
+
+
+[[command.subcommand_candidates]]
+value = "capoo_rub"
+help = "咖波蹭/咖波贴"
+
+
+[[command.subcommand_candidates]]
+value = "capoo_say"
+help = "咖波说"
+
+
+[[command.subcommand_candidates]]
+value = "capoo_stew"
+help = "咖波炖"
+
+
+[[command.subcommand_candidates]]
+value = "capoo_strike"
+help = "咖波撞/咖波头槌"
+
+
+[[command.subcommand_candidates]]
+value = "captain"
+help = "舰长"
+
+
+[[command.subcommand_candidates]]
+value = "caused_by_this"
+help = "这个引起的"
+
+
+[[command.subcommand_candidates]]
+value = "certificate"
+help = "奖状/证书"
+
+
+[[command.subcommand_candidates]]
+value = "chanshenzi"
+help = "馋身子"
+
+
+[[command.subcommand_candidates]]
+value = "charpic"
+help = "字符画"
+
+
+[[command.subcommand_candidates]]
+value = "chase_train"
+help = "追列车/追火车"
+
+
+[[command.subcommand_candidates]]
+value = "china_flag"
+help = "国旗"
+
+
+[[command.subcommand_candidates]]
+value = "chino_throw"
+help = "智乃扔/智乃抛"
+
+
+[[command.subcommand_candidates]]
+value = "clauvio_twist"
+help = "鼠鼠搓"
+
+
+[[command.subcommand_candidates]]
+value = "clown"
+help = "小丑"
+
+
+[[command.subcommand_candidates]]
+value = "clown_mask"
+help = "小丑面具"
+
+
+[[command.subcommand_candidates]]
+value = "confuse"
+help = "迷惑"
+
+
+[[command.subcommand_candidates]]
+value = "coupon"
+help = "兑换券"
+
+
+[[command.subcommand_candidates]]
+value = "cover_face"
+help = "捂脸"
+
+
+[[command.subcommand_candidates]]
+value = "crawl"
+help = "爬"
+
+
+[[command.subcommand_candidates]]
+value = "cyan"
+help = "群青"
+
+
+[[command.subcommand_candidates]]
+value = "daynight"
+help = "白天黑夜/白天晚上"
+
+
+[[command.subcommand_candidates]]
+value = "decent_kiss"
+help = "像样的亲亲"
+
+
+[[command.subcommand_candidates]]
+value = "dianzhongdian"
+help = "入典/典中典/黑白草图"
+
+
+[[command.subcommand_candidates]]
+value = "dinosaur"
+help = "恐龙/小恐龙"
+
+
+[[command.subcommand_candidates]]
+value = "distracted"
+help = "注意力涣散"
+
+
+[[command.subcommand_candidates]]
+value = "divorce"
+help = "离婚协议/离婚申请"
+
+
+[[command.subcommand_candidates]]
+value = "dog_dislike"
+help = "狗都不玩"
+
+
+[[command.subcommand_candidates]]
+value = "dog_of_vtb"
+help = "管人痴"
+
+
+[[command.subcommand_candidates]]
+value = "dont_go_near"
+help = "不要靠近"
+
+
+[[command.subcommand_candidates]]
+value = "dont_press"
+help = "不要按"
+
+
+[[command.subcommand_candidates]]
+value = "dont_touch"
+help = "别碰"
+
+
+[[command.subcommand_candidates]]
+value = "doraemon_say"
+help = "哆啦A梦说"
+
+
+[[command.subcommand_candidates]]
+value = "douyin"
+help = "douyin"
+
+
+[[command.subcommand_candidates]]
+value = "eat"
+help = "吃"
+
+
+[[command.subcommand_candidates]]
+value = "elysia_holdsign"
+help = "爱莉举牌"
+
+
+[[command.subcommand_candidates]]
+value = "emperor_dragon"
+help = "皇帝龙图"
+
+
+[[command.subcommand_candidates]]
+value = "erised_mirror"
+help = "意若思镜"
+
+
+[[command.subcommand_candidates]]
+value = "fade_away"
+help = "灰飞烟灭"
+
+
+[[command.subcommand_candidates]]
+value = "fanatic"
+help = "狂爱/狂粉"
+
+
+[[command.subcommand_candidates]]
+value = "father_work"
+help = "我爸爸"
+
+
+[[command.subcommand_candidates]]
+value = "fencing"
+help = "击剑/🤺"
+
+
+[[command.subcommand_candidates]]
+value = "fight_with_sunuo"
+help = "我打宿傩/我打宿傩吗"
+
+
+[[command.subcommand_candidates]]
+value = "fill_head"
+help = "满脑子"
+
+
+[[command.subcommand_candidates]]
+value = "find_chips"
+help = "整点薯条"
+
+
+[[command.subcommand_candidates]]
+value = "firefly_holdsign"
+help = "流萤举牌"
+
+
+[[command.subcommand_candidates]]
+value = "flash_blind"
+help = "闪瞎"
+
+
+[[command.subcommand_candidates]]
+value = "flick"
+help = "弹/脑瓜崩"
+
+
+[[command.subcommand_candidates]]
+value = "flush"
+help = "红温"
+
+
+[[command.subcommand_candidates]]
+value = "fogging"
+help = "回南天/水雾"
+
+
+[[command.subcommand_candidates]]
+value = "follow"
+help = "关注"
+
+
+[[command.subcommand_candidates]]
+value = "forbid"
+help = "禁止/禁"
+
+
+[[command.subcommand_candidates]]
+value = "frieren_take"
+help = "芙莉莲拿"
+
+
+[[command.subcommand_candidates]]
+value = "funny_mirror"
+help = "哈哈镜"
+
+
+[[command.subcommand_candidates]]
+value = "garbage"
+help = "垃圾/垃圾桶"
+
+
+[[command.subcommand_candidates]]
+value = "genshin_eat"
+help = "原神吃"
+
+
+[[command.subcommand_candidates]]
+value = "genshin_start"
+help = "原神启动"
+
+
+[[command.subcommand_candidates]]
+value = "good_news"
+help = "喜报"
+
+
+[[command.subcommand_candidates]]
+value = "google"
+help = "google"
+
+
+[[command.subcommand_candidates]]
+value = "google_captcha"
+help = "谷歌验证码"
+
+
+[[command.subcommand_candidates]]
+value = "gorilla_throw"
+help = "猩猩扔"
+
+
+[[command.subcommand_candidates]]
+value = "grab"
+help = "抓"
+
+
+[[command.subcommand_candidates]]
+value = "grab_both_hands"
+help = "双手抓"
+
+
+[[command.subcommand_candidates]]
+value = "guichu"
+help = "鬼畜"
+
+
+[[command.subcommand_candidates]]
+value = "gun"
+help = "手枪"
+
+
+[[command.subcommand_candidates]]
+value = "hammer"
+help = "锤"
+
+
+[[command.subcommand_candidates]]
+value = "haruhi_raise"
+help = "凉宫春日举"
+
+
+[[command.subcommand_candidates]]
+value = "head_butt"
+help = "顶"
+
+
+[[command.subcommand_candidates]]
+value = "high_eq"
+help = "高低情商/低高情商"
+
+
+[[command.subcommand_candidates]]
+value = "hit_screen"
+help = "打穿/打穿屏幕"
+
+
+[[command.subcommand_candidates]]
+value = "hold_grudge"
+help = "记仇"
+
+
+[[command.subcommand_candidates]]
+value = "hold_tight"
+help = "抱紧"
+
+
+[[command.subcommand_candidates]]
+value = "hug"
+help = "抱/抱抱"
+
+
+[[command.subcommand_candidates]]
+value = "hug_leg"
+help = "抱大腿"
+
+
+[[command.subcommand_candidates]]
+value = "hutao_bite"
+help = "胡桃啃"
+
+
+[[command.subcommand_candidates]]
+value = "imprison"
+help = "坐牢"
+
+
+[[command.subcommand_candidates]]
+value = "incivilization"
+help = "不文明"
+
+
+[[command.subcommand_candidates]]
+value = "intel_inside"
+help = "inside"
+
+
+[[command.subcommand_candidates]]
+value = "interview"
+help = "采访"
+
+
+[[command.subcommand_candidates]]
+value = "jerry_stare"
+help = "杰瑞盯"
+
+
+[[command.subcommand_candidates]]
+value = "jiamianqishi"
+help = "假面骑士"
+
+
+[[command.subcommand_candidates]]
+value = "jiji_king"
+help = "急急国王"
+
+
+[[command.subcommand_candidates]]
+value = "jinhsi"
+help = "汐汐/今汐"
+
+
+[[command.subcommand_candidates]]
+value = "jiubingfufa"
+help = "旧病复发"
+
+
+[[command.subcommand_candidates]]
+value = "jiujiu"
+help = "啾啾"
+
+
+[[command.subcommand_candidates]]
+value = "jump"
+help = "跳"
+
+
+[[command.subcommand_candidates]]
+value = "kaleidoscope"
+help = "万花筒/万花镜"
+
+
+[[command.subcommand_candidates]]
+value = "karyl_point"
+help = "凯露指"
+
+
+[[command.subcommand_candidates]]
+value = "keep_away"
+help = "远离"
+
+
+[[command.subcommand_candidates]]
+value = "keep_your_money"
+help = "压岁钱不要交给"
+
+
+[[command.subcommand_candidates]]
+value = "kick_ball"
+help = "踢球"
+
+
+[[command.subcommand_candidates]]
+value = "kirby_hammer"
+help = "卡比锤/卡比重锤"
+
+
+[[command.subcommand_candidates]]
+value = "kiss"
+help = "亲/亲亲"
+
+
+[[command.subcommand_candidates]]
+value = "klee_eat"
+help = "可莉吃"
+
+
+[[command.subcommand_candidates]]
+value = "knock"
+help = "敲"
+
+
+[[command.subcommand_candidates]]
+value = "kokona_seal"
+help = "心奈印章"
+
+
+[[command.subcommand_candidates]]
+value = "konata_watch"
+help = "泉此方看"
+
+
+[[command.subcommand_candidates]]
+value = "learn"
+help = "偷学"
+
+
+[[command.subcommand_candidates]]
+value = "left_right_jump"
+help = "左右横跳"
+
+
+[[command.subcommand_candidates]]
+value = "let_me_in"
+help = "让我进去"
+
+
+[[command.subcommand_candidates]]
+value = "lick_candy"
+help = "舔糖/舔棒棒糖"
+
+
+[[command.subcommand_candidates]]
+value = "lim_x_0"
+help = "等价无穷小"
+
+
+[[command.subcommand_candidates]]
+value = "listen_music"
+help = "听音乐"
+
+
+[[command.subcommand_candidates]]
+value = "little_angel"
+help = "小天使"
+
+
+[[command.subcommand_candidates]]
+value = "loading"
+help = "加载中"
+
+
+[[command.subcommand_candidates]]
+value = "look_flat"
+help = "看扁"
+
+
+[[command.subcommand_candidates]]
+value = "look_this_icon"
+help = "看图标"
+
+
+[[command.subcommand_candidates]]
+value = "loop"
+help = "循环"
+
+
+[[command.subcommand_candidates]]
+value = "lost_dog"
+help = "寻狗启事"
+
+
+[[command.subcommand_candidates]]
+value = "love_you"
+help = "永远爱你"
+
+
+[[command.subcommand_candidates]]
+value = "luotianyi_need"
+help = "洛天依要/天依要"
+
+
+[[command.subcommand_candidates]]
+value = "luotianyi_say"
+help = "洛天依说/天依说"
+
+
+[[command.subcommand_candidates]]
+value = "luoyonghao_say"
+help = "罗永浩说"
+
+
+[[command.subcommand_candidates]]
+value = "luxun_say"
+help = "鲁迅说/鲁迅说过"
+
+
+[[command.subcommand_candidates]]
+value = "mahiro_readbook"
+help = "真寻看书"
+
+
+[[command.subcommand_candidates]]
+value = "maikease"
+help = "麦克阿瑟说"
+
+
+[[command.subcommand_candidates]]
+value = "maimai_awaken"
+help = "旅行伙伴觉醒"
+
+
+[[command.subcommand_candidates]]
+value = "maimai_join"
+help = "旅行伙伴加入"
+
+
+[[command.subcommand_candidates]]
+value = "make_friend"
+help = "交个朋友"
+
+
+[[command.subcommand_candidates]]
+value = "marriage"
+help = "结婚申请/结婚登记"
+
+
+[[command.subcommand_candidates]]
+value = "meteor"
+help = "流星"
+
+
+[[command.subcommand_candidates]]
+value = "mihoyo"
+help = "米哈游"
+
+
+[[command.subcommand_candidates]]
+value = "mourning"
+help = "上香"
+
+
+[[command.subcommand_candidates]]
+value = "murmur"
+help = "低语"
+
+
+[[command.subcommand_candidates]]
+value = "my_friend_say"
+help = "我朋友说"
+
+
+[[command.subcommand_candidates]]
+value = "my_opinion"
+help = "我的意见如下/我的意见是"
+
+
+[[command.subcommand_candidates]]
+value = "my_wife"
+help = "我老婆/这是我老婆"
+
+
+[[command.subcommand_candidates]]
+value = "nahida_bite"
+help = "纳西妲啃/草神啃"
+
+
+[[command.subcommand_candidates]]
+value = "name_generator"
+help = "亚文化取名机/亚名"
+
+
+[[command.subcommand_candidates]]
+value = "need"
+help = "需要/你可能需要"
+
+
+[[command.subcommand_candidates]]
+value = "nekoha_holdsign"
+help = "猫羽雫举牌/猫猫举牌"
+
+
+[[command.subcommand_candidates]]
+value = "nihaosaoa"
+help = "你好骚啊"
+
+
+[[command.subcommand_candidates]]
+value = "nijika_holdsign"
+help = "虹夏举牌"
+
+
+[[command.subcommand_candidates]]
+value = "no_response"
+help = "无响应"
+
+
+[[command.subcommand_candidates]]
+value = "nokia"
+help = "诺基亚/有内鬼"
+
+
+[[command.subcommand_candidates]]
+value = "note_for_leave"
+help = "请假条"
+
+
+[[command.subcommand_candidates]]
+value = "operator_generator"
+help = "合成大干员"
+
+
+[[command.subcommand_candidates]]
+value = "oshi_no_ko"
+help = "我推的网友"
+
+
+[[command.subcommand_candidates]]
+value = "osu"
+help = "osu"
+
+
+[[command.subcommand_candidates]]
+value = "out"
+help = "out"
+
+
+[[command.subcommand_candidates]]
+value = "overtime"
+help = "加班"
+
+
+[[command.subcommand_candidates]]
+value = "p5letter"
+help = "p5预告信"
+
+
+[[command.subcommand_candidates]]
+value = "paint"
+help = "这像画吗"
+
+
+[[command.subcommand_candidates]]
+value = "painter"
+help = "小画家"
+
+
+[[command.subcommand_candidates]]
+value = "panda_dragon_figure"
+help = "熊猫龙图"
+
+
+[[command.subcommand_candidates]]
+value = "pass_the_buck"
+help = "推锅/甩锅"
+
+
+[[command.subcommand_candidates]]
+value = "pat"
+help = "拍"
+
+
+[[command.subcommand_candidates]]
+value = "pepe_raise"
+help = "佩佩举"
+
+
+[[command.subcommand_candidates]]
+value = "perfect"
+help = "完美"
+
+
+[[command.subcommand_candidates]]
+value = "petpet"
+help = "摸/摸摸/摸头/rua"
+
+
+[[command.subcommand_candidates]]
+value = "pinch"
+help = "捏/捏脸"
+
+
+[[command.subcommand_candidates]]
+value = "pixelate"
+help = "像素化"
+
+
+[[command.subcommand_candidates]]
+value = "pjsk"
+help = "pjsk/世界计划"
+
+
+[[command.subcommand_candidates]]
+value = "plana_eat"
+help = "普拉娜吃/普拉娜舔"
+
+
+[[command.subcommand_candidates]]
+value = "play_baseball"
+help = "打棒球"
+
+
+[[command.subcommand_candidates]]
+value = "play_basketball"
+help = "打篮球/火柴人打篮球"
+
+
+[[command.subcommand_candidates]]
+value = "play_game"
+help = "玩游戏"
+
+
+[[command.subcommand_candidates]]
+value = "play_together"
+help = "一起玩"
+
+
+[[command.subcommand_candidates]]
+value = "police"
+help = "出警"
+
+
+[[command.subcommand_candidates]]
+value = "policeman"
+help = "警察"
+
+
+[[command.subcommand_candidates]]
+value = "pornhub"
+help = "ph/pornhub"
+
+
+[[command.subcommand_candidates]]
+value = "potato"
+help = "土豆"
+
+
+[[command.subcommand_candidates]]
+value = "pound"
+help = "捣"
+
+
+[[command.subcommand_candidates]]
+value = "praise"
+help = "表扬"
+
+
+[[command.subcommand_candidates]]
+value = "printing"
+help = "打印"
+
+
+[[command.subcommand_candidates]]
+value = "prpr"
+help = "舔/舔屏/prpr"
+
+
+[[command.subcommand_candidates]]
+value = "psyduck"
+help = "可达鸭"
+
+
+[[command.subcommand_candidates]]
+value = "punch"
+help = "打拳"
+
+
+[[command.subcommand_candidates]]
+value = "pyramid"
+help = "四棱锥/金字塔"
+
+
+[[command.subcommand_candidates]]
+value = "qiegewala"
+help = "切格瓦拉"
+
+
+[[command.subcommand_candidates]]
+value = "raise_image"
+help = "举"
+
+
+[[command.subcommand_candidates]]
+value = "raise_sign"
+help = "举牌"
+
+
+[[command.subcommand_candidates]]
+value = "read_book"
+help = "看书"
+
+
+[[command.subcommand_candidates]]
+value = "remote_control"
+help = "遥控/控制"
+
+
+[[command.subcommand_candidates]]
+value = "repeat"
+help = "复读"
+
+
+[[command.subcommand_candidates]]
+value = "rip"
+help = "撕"
+
+
+[[command.subcommand_candidates]]
+value = "rip_angrily"
+help = "怒撕"
+
+
+[[command.subcommand_candidates]]
+value = "rip_clothes"
+help = "撕衣服"
+
+
+[[command.subcommand_candidates]]
+value = "rise_dead"
+help = "诈尸/秽土转生"
+
+
+[[command.subcommand_candidates]]
+value = "roll"
+help = "滚"
+
+
+[[command.subcommand_candidates]]
+value = "rotate_3d"
+help = "三维旋转"
+
+
+[[command.subcommand_candidates]]
+value = "rub"
+help = "贴/贴贴/蹭/蹭蹭"
+
+
+[[command.subcommand_candidates]]
+value = "run"
+help = "快跑"
+
+
+[[command.subcommand_candidates]]
+value = "run_away"
+help = "快逃"
+
+
+[[command.subcommand_candidates]]
+value = "safe_sense"
+help = "安全感"
+
+
+[[command.subcommand_candidates]]
+value = "saimin_app"
+help = "催眠app"
+
+
+[[command.subcommand_candidates]]
+value = "scratch_head"
+help = "挠头"
+
+
+[[command.subcommand_candidates]]
+value = "scratchcard"
+help = "刮刮乐"
+
+
+[[command.subcommand_candidates]]
+value = "scroll"
+help = "滚屏"
+
+
+[[command.subcommand_candidates]]
+value = "seal"
+help = "源石封印"
+
+
+[[command.subcommand_candidates]]
+value = "sekaiichi_kawaii"
+help = "世界第一可爱"
+
+
+[[command.subcommand_candidates]]
+value = "shake_head"
+help = "晃脑"
+
+
+[[command.subcommand_candidates]]
+value = "shiroko_pero"
+help = "白子舔"
+
+
+[[command.subcommand_candidates]]
+value = "shishilani"
+help = "食屎啦你"
+
+
+[[command.subcommand_candidates]]
+value = "shock"
+help = "震惊"
+
+
+[[command.subcommand_candidates]]
+value = "shuifandui"
+help = "谁反对"
+
+
+[[command.subcommand_candidates]]
+value = "shutup"
+help = "别说了"
+
+
+[[command.subcommand_candidates]]
+value = "sit_still"
+help = "坐得住"
+
+
+[[command.subcommand_candidates]]
+value = "slap"
+help = "一巴掌"
+
+
+[[command.subcommand_candidates]]
+value = "slogan"
+help = "口号"
+
+
+[[command.subcommand_candidates]]
+value = "smash"
+help = "砸"
+
+
+[[command.subcommand_candidates]]
+value = "sold_out"
+help = "卖掉了"
+
+
+[[command.subcommand_candidates]]
+value = "speechless"
+help = "无语"
+
+
+[[command.subcommand_candidates]]
+value = "sphere_rotate"
+help = "球面旋转"
+
+
+[[command.subcommand_candidates]]
+value = "spider"
+help = "蜘蛛/蜘蛛爬"
+
+
+[[command.subcommand_candidates]]
+value = "stare_at_you"
+help = "盯着你"
+
+
+[[command.subcommand_candidates]]
+value = "steam_message"
+help = "steam消息"
+
+
+[[command.subcommand_candidates]]
+value = "step_on"
+help = "踩"
+
+
+[[command.subcommand_candidates]]
+value = "stew"
+help = "炖"
+
+
+[[command.subcommand_candidates]]
+value = "stickman_dancing"
+help = "跳舞/火柴人跳舞"
+
+
+[[command.subcommand_candidates]]
+value = "subject3"
+help = "科目三"
+
+
+[[command.subcommand_candidates]]
+value = "suck"
+help = "吸/嗦"
+
+
+[[command.subcommand_candidates]]
+value = "support"
+help = "精神支柱"
+
+
+[[command.subcommand_candidates]]
+value = "swirl_turn"
+help = "回旋转/旋风转"
+
+
+[[command.subcommand_candidates]]
+value = "symmetric"
+help = "对称"
+
+
+[[command.subcommand_candidates]]
+value = "tankuku_raisesign"
+help = "唐可可举牌"
+
+
+[[command.subcommand_candidates]]
+value = "taunt"
+help = "嘲讽"
+
+
+[[command.subcommand_candidates]]
+value = "teach"
+help = "讲课/敲黑板"
+
+
+[[command.subcommand_candidates]]
+value = "tease"
+help = "拿捏/戏弄"
+
+
+[[command.subcommand_candidates]]
+value = "telescope"
+help = "望远镜"
+
+
+[[command.subcommand_candidates]]
+value = "thermometer_gun"
+help = "体温枪"
+
+
+[[command.subcommand_candidates]]
+value = "think_what"
+help = "想什么"
+
+
+[[command.subcommand_candidates]]
+value = "this_chicken"
+help = "这是鸡/🐔"
+
+
+[[command.subcommand_candidates]]
+value = "throw"
+help = "丢/扔"
+
+
+[[command.subcommand_candidates]]
+value = "throw_gif"
+help = "抛/掷"
+
+
+[[command.subcommand_candidates]]
+value = "thump"
+help = "捶"
+
+
+[[command.subcommand_candidates]]
+value = "thump_wildly"
+help = "捶爆/爆捶"
+
+
+[[command.subcommand_candidates]]
+value = "tightly"
+help = "紧贴/紧紧贴着"
+
+
+[[command.subcommand_candidates]]
+value = "time_to_go"
+help = "该走了"
+
+
+[[command.subcommand_candidates]]
+value = "together"
+help = "一起"
+
+
+[[command.subcommand_candidates]]
+value = "tom_tease"
+help = "汤姆嘲笑"
+
+
+[[command.subcommand_candidates]]
+value = "tomb_yeah"
+help = "上坟/坟前比耶"
+
+
+[[command.subcommand_candidates]]
+value = "trance"
+help = "恍惚"
+
+
+[[command.subcommand_candidates]]
+value = "trolley"
+help = "推车"
+
+
+[[command.subcommand_candidates]]
+value = "turn"
+help = "转"
+
+
+[[command.subcommand_candidates]]
+value = "twist"
+help = "搓"
+
+
+[[command.subcommand_candidates]]
+value = "universal"
+help = "万能表情/空白表情"
+
+
+[[command.subcommand_candidates]]
+value = "upside_down"
+help = "反了"
+
+
+[[command.subcommand_candidates]]
+value = "vibrate"
+help = "震动"
+
+
+[[command.subcommand_candidates]]
+value = "wakeup"
+help = "好起来了"
+
+
+[[command.subcommand_candidates]]
+value = "wallpaper"
+help = "墙纸"
+
+
+[[command.subcommand_candidates]]
+value = "walnut_pad"
+help = "胡桃平板"
+
+
+[[command.subcommand_candidates]]
+value = "walnut_zoom"
+help = "胡桃放大"
+
+
+[[command.subcommand_candidates]]
+value = "wangjingze"
+help = "王境泽"
+
+
+[[command.subcommand_candidates]]
+value = "washer"
+help = "洗衣机"
+
+
+[[command.subcommand_candidates]]
+value = "wave"
+help = "波纹"
+
+
+[[command.subcommand_candidates]]
+value = "wechat_pay"
+help = "微信支付"
+
+
+[[command.subcommand_candidates]]
+value = "weisuoyuwei"
+help = "为所欲为"
+
+
+[[command.subcommand_candidates]]
+value = "what_he_wants"
+help = "最想要的东西"
+
+
+[[command.subcommand_candidates]]
+value = "what_i_want_to_do"
+help = "我想上的"
+
+
+[[command.subcommand_candidates]]
+value = "why_at_me"
+help = "为什么@我"
+
+
+[[command.subcommand_candidates]]
+value = "why_have_hands"
+help = "为什么要有手"
+
+
+[[command.subcommand_candidates]]
+value = "windmill_turn"
+help = "风车转"
+
+
+[[command.subcommand_candidates]]
+value = "wish_fail"
+help = "许愿失败"
+
+
+[[command.subcommand_candidates]]
+value = "wooden_fish"
+help = "木鱼"
+
+
+[[command.subcommand_candidates]]
+value = "worship"
+help = "膜/膜拜"
+
+
+[[command.subcommand_candidates]]
+value = "wujing"
+help = "吴京中国"
+
+
+[[command.subcommand_candidates]]
+value = "wunian"
+help = "五年怎么过的"
+
+
+[[command.subcommand_candidates]]
+value = "wuyage"
+help = "乌鸦哥"
+
+
+[[command.subcommand_candidates]]
+value = "yalidaye"
+help = "压力大爷"
+
+
+[[command.subcommand_candidates]]
+value = "yeshu"
+help = "椰树椰汁"
+
+
+[[command.subcommand_candidates]]
+value = "you_dont_get"
+help = "你不懂啦"
+
+
+[[command.subcommand_candidates]]
+value = "you_should_call"
+help = "致电/你应该致电"
+
+
+[[command.subcommand_candidates]]
+value = "your_new_years_eve"
+help = "你的跨年"
+
+
+[[command.subcommand_candidates]]
+value = "youtube"
+help = "yt/youtube"
+
+
+[[command.subcommand_candidates]]
+value = "zengxiaoxian"
+help = "曾小贤"

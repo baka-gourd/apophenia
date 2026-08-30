@@ -1,0 +1,20 @@
+[command]
+name = "gif"
+description = "gif操作"
+subcommand_required = true
+
+[[command.subcommand_candidates]]
+value = "split"
+help = "拆分"
+
+[[command.subcommand_candidates]]
+value = "merge"
+help = "合并"
+
+[[command.subcommand_candidates]]
+value = "reverse"
+help = "反转"
+
+[[command.subcommand_candidates]]
+value = "duration"
+help = "调整帧间隔时间"

@@ -1,0 +1,10 @@
+[command]
+name = "search"
+description = "搜索表情"
+
+[[command.arguments]]
+id = "keyword"
+position = 1
+value_name = "KEYWORD"
+required = true
+help = "关键词"
