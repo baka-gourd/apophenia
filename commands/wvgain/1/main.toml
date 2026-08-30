@@ -1,0 +1,95 @@
+schema_version = 1
+
+[command]
+name = "wvgain"
+binary = "wvgain"
+description = "Apply ReplayGain to WavPack files"
+supported_versions = ["5.9.0"]
+version_commands = [["-v"]]
+disable_help_flag = true
+
+[[command.version_preprocessors]]
+engine = "regex"
+pattern = "(?s)^wvgain (?P<version>[^[:space:]]+).*$"
+replace = "$version"
+
+[[command.options]]
+id = "album"
+names = ["-a"]
+action = "flag"
+help = "Treat all scanned files as an album."
+
+[[command.options]]
+id = "clean"
+names = ["-c"]
+action = "flag"
+help = "Clean ReplayGain values without analysis."
+
+[[command.options]]
+id = "display"
+names = ["-d"]
+action = "flag"
+help = "Display calculated values only."
+
+[[command.options]]
+id = "ignore_wvc"
+names = ["-i"]
+action = "flag"
+help = "Ignore the correction file and force hybrid lossy mode."
+
+[[command.options]]
+id = "low_priority"
+names = ["-l"]
+action = "flag"
+help = "Run at low priority for smoother multitasking."
+
+[[command.options]]
+id = "new_only"
+names = ["-n"]
+action = "flag"
+help = "Process only files without existing track or album information."
+
+[[command.options]]
+id = "quiet"
+names = ["-q"]
+action = "flag"
+help = "Keep console output to a minimum."
+
+[[command.options]]
+id = "stored_only"
+names = ["-s"]
+action = "flag"
+help = "Show stored values only without analysis."
+
+[[command.options]]
+id = "threads"
+names = ["-t"]
+action = "flag"
+help = "Use multiple threads for faster operation."
+
+[[command.options]]
+id = "single_thread"
+names = ["-1"]
+action = "flag"
+help = "Do not use multiple threads."
+
+[[command.options]]
+id = "version"
+names = ["-v"]
+action = "flag"
+help = "Write the version to stdout."
+
+[[command.options]]
+id = "no_console_title"
+names = ["-z"]
+action = "flag"
+help = "Do not set the console title to indicate progress."
+
+[[command.arguments]]
+id = "input"
+position = 1
+value_name = "INPUT"
+required = true
+multiple = true
+value_hint = "file_path"
+help = "One or more WavPack files; wildcards are supported."

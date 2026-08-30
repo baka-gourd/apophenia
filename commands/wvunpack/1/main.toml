@@ -1,0 +1,284 @@
+schema_version = 1
+
+[command]
+name = "wvunpack"
+binary = "wvunpack"
+description = "Unpack or verify existing WavPack files"
+supported_versions = ["5.9.0"]
+version_commands = [["--version"]]
+disable_help_flag = true
+
+[[command.version_preprocessors]]
+engine = "regex"
+pattern = "(?s)^wvunpack (?P<version>[^[:space:]]+).*$"
+replace = "$version"
+
+[[command.options]]
+id = "aif"
+names = ["--aif"]
+action = "flag"
+help = "Force output to Apple AIFF."
+
+[[command.options]]
+id = "aif_le"
+names = ["--aif-le"]
+action = "flag"
+help = "Force output to Apple AIFF-C/sowt."
+
+[[command.options]]
+id = "blind_decode"
+names = ["-b"]
+action = "flag"
+help = "Decode all stream blocks and ignore length information."
+
+[[command.options]]
+id = "extract_cuesheet"
+names = ["-c"]
+action = "flag"
+help = "Extract the cuesheet to stdout without audio decode."
+
+[[command.options]]
+id = "extract_cuesheet_file"
+names = ["-cc"]
+action = "flag"
+help = "Extract the cuesheet to a .cue file in addition to audio."
+
+[[command.options]]
+id = "caf_be"
+names = ["--caf-be"]
+action = "flag"
+help = "Force output to big-endian Core Audio."
+
+[[command.options]]
+id = "caf_le"
+names = ["--caf-le"]
+action = "flag"
+help = "Force output to little-endian Core Audio."
+
+[[command.options]]
+id = "delete_source"
+names = ["-d"]
+action = "flag"
+help = "Delete the source file if successful."
+
+[[command.options]]
+id = "dff"
+names = ["--dff", "--dsdiff"]
+action = "flag"
+help = "Force output to Philips DSDIFF."
+
+[[command.options]]
+id = "drop"
+names = ["--drop"]
+action = "flag"
+help = "Use drag-and-drop mode for multiple input files."
+
+[[command.options]]
+id = "dsf"
+names = ["--dsf"]
+action = "flag"
+help = "Force output to Sony DSF."
+
+[[command.options]]
+id = "file_info"
+names = ["-f[n]"]
+action = "value"
+value_name = "N"
+help = "Write file information in machine-parsable format."
+
+[[command.options]]
+id = "help"
+names = ["--help"]
+action = "help"
+help = "Show this extended help display."
+
+[[command.options]]
+id = "ignore_wvc"
+names = ["-i"]
+action = "flag"
+help = "Ignore the correction file and force hybrid lossy decompression."
+
+[[command.options]]
+id = "low_priority"
+names = ["-l"]
+action = "flag"
+help = "Run at low priority."
+
+[[command.options]]
+id = "md5"
+names = ["-m"]
+action = "flag"
+help = "Calculate and display the MD5 signature."
+
+[[command.options]]
+id = "no_audio"
+names = ["-n"]
+action = "flag"
+help = "Do not decode audio; use with tag extraction."
+
+[[command.options]]
+id = "no_overwrite"
+names = ["--no-overwrite"]
+action = "flag"
+help = "Never overwrite existing files."
+
+[[command.options]]
+id = "no_threads"
+names = ["--no-threads"]
+action = "flag"
+help = "Do not use multiple threads."
+
+[[command.options]]
+id = "normalize_floats"
+names = ["--normalize-floats"]
+action = "flag"
+help = "Normalize float audio to the range -1.0 to 1.0."
+
+[[command.options]]
+id = "no_utf8_convert"
+names = ["--no-utf8-convert"]
+action = "flag"
+help = "Leave tag items in UTF-8 when extracting to files."
+
+[[command.options]]
+id = "pause"
+names = ["--pause"]
+action = "flag"
+help = "Pause before exiting."
+
+[[command.options]]
+id = "quiet"
+names = ["-q"]
+action = "flag"
+help = "Keep console output to a minimum."
+
+[[command.options]]
+id = "raw"
+names = ["-r", "--raw"]
+action = "flag"
+help = "Force raw audio decode."
+
+[[command.options]]
+id = "raw_pcm"
+names = ["--raw-pcm"]
+action = "flag"
+help = "Decode raw audio, converting DSD files to 24-bit PCM."
+
+[[command.options]]
+id = "summary"
+names = ["-s"]
+action = "flag"
+help = "Display summary information only."
+
+[[command.options]]
+id = "super_summary"
+names = ["-ss"]
+action = "flag"
+help = "Display summary information with tags."
+
+[[command.options]]
+id = "skip"
+names = ["--skip"]
+action = "value"
+value_name = "[-][SAMPLE|HH:MM:SS.SS]"
+allow_hyphen_values = true
+help = "Start decoding at the specified sample or time."
+
+[[command.options]]
+id = "timestamp"
+names = ["-t"]
+action = "flag"
+help = "Copy input file timestamps to output files."
+
+[[command.options]]
+id = "threads"
+names = ["--threads"]
+action = "value"
+value_name = "N"
+possible_values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+help = "Use multiple threads; N must be 1 to 12."
+
+[[command.options]]
+id = "until"
+names = ["--until"]
+action = "value"
+value_name = "[+|-][SAMPLE|HH:MM:SS.SS]"
+allow_hyphen_values = true
+help = "Stop decoding at the specified sample or time."
+
+[[command.options]]
+id = "verify"
+names = ["-v"]
+action = "flag"
+help = "Verify source data without creating output."
+
+[[command.options]]
+id = "quick_verify"
+names = ["-vv"]
+action = "flag"
+help = "Quickly verify version 5 or newer files."
+
+[[command.options]]
+id = "quick_verify_verbose"
+names = ["-vvv"]
+action = "flag"
+help = "Quickly verify with verbose debugging output."
+
+[[command.options]]
+id = "version"
+names = ["--version"]
+action = "flag"
+help = "Write the version to stdout."
+
+[[command.options]]
+id = "wav"
+names = ["-w", "--wav"]
+action = "flag"
+help = "Force output to Microsoft RIFF/RF64."
+
+[[command.options]]
+id = "w64"
+names = ["--w64"]
+action = "flag"
+help = "Force output to Sony Wave64."
+
+[[command.options]]
+id = "extract_field"
+names = ["-x"]
+action = "value"
+value_name = "FIELD"
+help = "Extract the specified tag field to stdout without audio decode."
+
+[[command.options]]
+id = "extract_field_file"
+names = ["-xx"]
+action = "value"
+value_name = "FIELD[=FILE]"
+help = "Extract the specified tag field to a file."
+
+[[command.options]]
+id = "yes"
+names = ["-y"]
+action = "flag"
+help = "Answer yes to overwrite warnings."
+
+[[command.options]]
+id = "no_console_title"
+names = ["-z"]
+action = "flag"
+help = "Do not set the console title to indicate progress."
+
+[[command.arguments]]
+id = "input"
+position = 1
+value_name = "INPUT"
+required = true
+value_hint = "file_path"
+help = "Input WavPack file or standard input."
+
+[[command.arguments]]
+id = "output"
+position = 2
+value_name = "OUTPUT"
+value_hint = "file_path"
+help = "Output audio file, path, or standard output."

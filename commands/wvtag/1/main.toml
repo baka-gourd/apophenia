@@ -1,0 +1,140 @@
+schema_version = 1
+
+[command]
+name = "wvtag"
+binary = "wvtag"
+description = "Apply or edit metadata tags on WavPack files"
+supported_versions = ["5.9.0"]
+version_commands = [["--version"]]
+disable_help_flag = true
+
+[[command.version_preprocessors]]
+engine = "regex"
+pattern = "(?s)^wvtag (?P<version>[^[:space:]]+).*$"
+replace = "$version"
+
+[[command.options]]
+id = "allow_huge_tags"
+names = ["--allow-huge-tags"]
+action = "flag"
+help = "Allow tag data up to 16 MB."
+
+[[command.options]]
+id = "extract_cuesheet"
+names = ["-c"]
+action = "flag"
+help = "Extract the cuesheet to stdout."
+
+[[command.options]]
+id = "extract_cuesheet_file"
+names = ["-cc"]
+action = "flag"
+help = "Extract the cuesheet to a .cue file."
+
+[[command.options]]
+id = "clean"
+names = ["--clean", "--clear"]
+action = "flag"
+help = "Clean all items from the tag."
+
+[[command.options]]
+id = "delete"
+names = ["-d"]
+action = "value"
+value_name = "FIELD"
+multiple = true
+help = "Delete the specified metadata item."
+
+[[command.options]]
+id = "help"
+names = ["-h", "--help"]
+action = "help"
+help = "Show this extended help display."
+
+[[command.options]]
+id = "import_file"
+names = ["--import-file"]
+action = "value"
+value_name = "FILE"
+value_hint = "file_path"
+help = "Import all tag items from a WavPack file."
+
+[[command.options]]
+id = "import_id3"
+names = ["--import-id3"]
+action = "flag"
+help = "Import ID3v2 tags from the original file trailer."
+
+[[command.options]]
+id = "list"
+names = ["-l", "--list"]
+action = "flag"
+help = "List all tag items."
+
+[[command.options]]
+id = "no_utf8_convert"
+names = ["--no-utf8-convert"]
+action = "flag"
+help = "Assume tag values are already UTF-8."
+
+[[command.options]]
+id = "pause"
+names = ["--pause"]
+action = "flag"
+help = "Pause before exiting."
+
+[[command.options]]
+id = "quiet"
+names = ["-q"]
+action = "flag"
+help = "Keep console output to a minimum."
+
+[[command.options]]
+id = "version"
+names = ["-v", "--version"]
+action = "flag"
+help = "Write the version to stdout."
+
+[[command.options]]
+id = "write"
+names = ["-w"]
+action = "value"
+value_name = "Field=Value"
+multiple = true
+help = "Delete or write a text metadata item."
+
+[[command.options]]
+id = "write_binary_tag"
+names = ["--write-binary-tag"]
+action = "value"
+value_name = "Field=@file.ext"
+help = "Write a binary metadata file to an APEv2 tag."
+
+[[command.options]]
+id = "extract_field"
+names = ["-x"]
+action = "value"
+value_name = "FIELD"
+help = "Extract the specified tag field to stdout."
+
+[[command.options]]
+id = "extract_field_file"
+names = ["-xx"]
+action = "value"
+value_name = "Field[=FILE]"
+help = "Extract the specified tag field to a file."
+
+[[command.options]]
+id = "yes"
+names = ["-y"]
+action = "flag"
+help = "Answer yes to overwrite warnings."
+
+[[command.arguments]]
+id = "file"
+position = 1
+value_name = "FILE"
+required = true
+multiple = true
+value_hint = "file_path"
+help = "One or more WavPack files; wildcards are supported."

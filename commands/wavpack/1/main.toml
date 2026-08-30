@@ -1,0 +1,321 @@
+schema_version = 1
+
+[command]
+name = "wavpack"
+binary = "wavpack"
+description = "Create or transcode WavPack files"
+supported_versions = ["5.9.0"]
+version_commands = [["--version"]]
+disable_help_flag = true
+
+[[command.version_preprocessors]]
+engine = "regex"
+pattern = "(?s)^wavpack (?P<version>[^[:space:]]+).*$"
+replace = "$version"
+
+[[command.options]]
+id = "adobe_audition"
+names = ["-a"]
+action = "flag"
+help = "Adobe Audition (CoolEdit) mode for 32-bit floats."
+
+[[command.options]]
+id = "allow_huge_tags"
+names = ["--allow-huge-tags"]
+action = "flag"
+help = "Allow tag data up to 16 MB."
+
+[[command.options]]
+id = "hybrid_bitrate"
+names = ["-b<n>"]
+action = "value"
+value_name = "N"
+help = "Enable hybrid compression with the specified bitrate."
+
+[[command.options]]
+id = "blocksize"
+names = ["--blocksize"]
+action = "value"
+value_name = "N"
+help = "Specify block size in samples."
+
+[[command.options]]
+id = "hybrid_correction"
+names = ["-c"]
+action = "flag"
+help = "Create a correction file in hybrid mode."
+
+[[command.options]]
+id = "hybrid_bitrate_correction"
+names = ["-c<n>"]
+action = "value"
+value_name = "N"
+help = "Specify two-file hybrid lossless bitrate."
+
+[[command.options]]
+id = "maximum_hybrid_compression"
+names = ["-cc"]
+action = "flag"
+help = "Use maximum hybrid lossless compression."
+
+[[command.options]]
+id = "channel_order"
+names = ["--channel-order"]
+action = "value"
+value_name = "LIST"
+help = "Specify a comma-separated channel order."
+
+[[command.options]]
+id = "cross_decorr"
+names = ["--cross-decorr"]
+action = "flag"
+help = "Use cross-channel correlation in hybrid mode."
+
+[[command.options]]
+id = "delete_source"
+names = ["-d"]
+action = "flag"
+help = "Delete the source file if successful."
+
+[[command.options]]
+id = "drop"
+names = ["--drop"]
+action = "flag"
+help = "Use drag-and-drop mode for multiple input files."
+
+[[command.options]]
+id = "fast"
+names = ["-f"]
+action = "flag"
+help = "Use faster encode and decode with a compression compromise."
+
+[[command.options]]
+id = "force_even_byte_depth"
+names = ["--force-even-byte-depth"]
+action = "flag"
+help = "Ignore non-whole-byte bit depths and round up."
+
+[[command.options]]
+id = "normal"
+names = ["-g"]
+action = "flag"
+help = "Use general/normal mode."
+
+[[command.options]]
+id = "high_quality"
+names = ["-h"]
+action = "flag"
+help = "Use high quality compression."
+
+[[command.options]]
+id = "very_high_quality"
+names = ["-hh"]
+action = "flag"
+help = "Use very high quality compression."
+
+[[command.options]]
+id = "help"
+names = ["--help"]
+action = "help"
+help = "Show this extended help display."
+
+[[command.options]]
+id = "ignore_header_length"
+names = ["-i"]
+action = "flag"
+help = "Ignore the length in the input header and read to EOF."
+
+[[command.options]]
+id = "import_id3"
+names = ["--import-id3"]
+action = "flag"
+help = "Attempt to import ID3v2 tags from the file trailer."
+
+[[command.options]]
+id = "joint_stereo"
+names = ["-j<n>"]
+action = "value"
+value_name = "N"
+help = "Override joint stereo mode."
+
+[[command.options]]
+id = "low_priority"
+names = ["-l"]
+action = "flag"
+help = "Run at lower priority for smoother multitasking."
+
+[[command.options]]
+id = "md5"
+names = ["-m"]
+action = "flag"
+help = "Compute and store an MD5 signature of raw audio data."
+
+[[command.options]]
+id = "merge_blocks"
+names = ["--merge-blocks"]
+action = "flag"
+help = "Merge consecutive blocks with equal redundancy."
+
+[[command.options]]
+id = "noise"
+names = ["-n"]
+action = "flag"
+help = "Calculate average and peak quantization noise."
+
+[[command.options]]
+id = "no_overwrite"
+names = ["--no-overwrite"]
+action = "flag"
+help = "Never overwrite existing files."
+
+[[command.options]]
+id = "no_threads"
+names = ["--no-threads"]
+action = "flag"
+help = "Do not use multiple threads."
+
+[[command.options]]
+id = "no_utf8_convert"
+names = ["--no-utf8-convert"]
+action = "flag"
+help = "Assume tag values are already UTF-8."
+
+[[command.options]]
+id = "optimize_int32"
+names = ["--optimize-int32"]
+action = "flag"
+help = "Optimize some specific 32-bit integer files."
+
+[[command.options]]
+id = "pair_unassigned_channels"
+names = ["--pair-unassigned-chans"]
+action = "flag"
+help = "Encode unassigned channels into stereo pairs."
+
+[[command.options]]
+id = "pause"
+names = ["--pause"]
+action = "flag"
+help = "Pause before exiting."
+
+[[command.options]]
+id = "pre_quantize"
+names = ["--pre-quantize"]
+action = "value"
+value_name = "BITS"
+help = "Pre-quantize samples before encoding and MD5 calculation."
+
+[[command.options]]
+id = "quiet"
+names = ["-q"]
+action = "flag"
+help = "Keep console output to a minimum."
+
+[[command.options]]
+id = "raw_headers"
+names = ["-r"]
+action = "flag"
+help = "Parse headers without storing audio format information."
+
+[[command.options]]
+id = "raw_pcm"
+names = ["--raw-pcm"]
+action = "value"
+value_name = "SR,BPS,NCH,ENDIAN"
+help = "Read raw PCM input with optional format parameters."
+
+[[command.options]]
+id = "raw_pcm_skip"
+names = ["--raw-pcm-skip"]
+action = "value"
+value_name = "BEGIN[,END]"
+help = "Skip bytes at the beginning and end of raw PCM input."
+
+[[command.options]]
+id = "noise_shaping"
+names = ["-s<n>"]
+action = "value"
+value_name = "N"
+help = "Override noise shaping with a value from -1.0 to 1.0."
+allow_negative_numbers = true
+
+[[command.options]]
+id = "threads"
+names = ["--threads"]
+action = "value"
+value_name = "N"
+possible_values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+help = "Use multiple threads; N must be 1 to 12."
+
+[[command.options]]
+id = "timestamp"
+names = ["-t"]
+action = "flag"
+help = "Copy input file timestamps to output files."
+
+[[command.options]]
+id = "use_dns"
+names = ["--use-dns"]
+action = "flag"
+help = "Force dynamic noise shaping in hybrid mode."
+
+[[command.options]]
+id = "verify"
+names = ["-v"]
+action = "flag"
+help = "Verify output file integrity after writing."
+
+[[command.options]]
+id = "version"
+names = ["--version"]
+action = "flag"
+help = "Write the version to stdout."
+
+[[command.options]]
+id = "write_tag"
+names = ["-w"]
+action = "value"
+value_name = "Encoder|Settings|Field=Value"
+multiple = true
+help = "Write encoder, settings, or specified text metadata to an APEv2 tag."
+
+[[command.options]]
+id = "write_binary_tag"
+names = ["--write-binary-tag"]
+action = "value"
+value_name = "Field=@file.ext"
+help = "Write a binary metadata file to an APEv2 tag."
+
+[[command.options]]
+id = "extra_processing"
+names = ["-x[n]"]
+action = "value"
+value_name = "N"
+help = "Enable extra encode processing, optionally from 0 to 6."
+
+[[command.options]]
+id = "yes"
+names = ["-y"]
+action = "flag"
+help = "Answer yes to all warnings."
+
+[[command.options]]
+id = "no_console_title"
+names = ["-z"]
+action = "flag"
+help = "Do not set the console title to indicate progress."
+
+[[command.arguments]]
+id = "input"
+position = 1
+value_name = "INPUT"
+required = true
+value_hint = "file_path"
+help = "Input WavPack or supported audio file."
+
+[[command.arguments]]
+id = "output"
+position = 2
+value_name = "OUTPUT"
+value_hint = "file_path"
+help = "Output WavPack file or path."
