@@ -33,3 +33,19 @@ download_url = "https://example.com/apophenia.db"
 
 when output is specified, the completion script will be written to the given path, not stdio.
 When download_url is specified, the database will be downloaded from the given URL instead of the default location.
+
+## Supported CLIs
+
+| CLI | Platforms | Version(verified) |
+| --- | --- | --- |
+| [zpaqfranz](https://github.com/fcorbelli/zpaqfranz) | Windows | |
+| [flac](https://xiph.org/flac/index.html) | Windows | 1.5.0 |
+| [metaflac](https://xiph.org/flac/index.html) | Windows | 1.5.0 |
+| [cjxl](https://github.com/libjxl/libjxl) | Windows | 0.12.0 |
+| [cksum(uutils)](https://github.com/uutils/coreutils) | Windows | 0.10.0 |
+| [meme](https://github.com/MemeCrafters/meme-generator-rs) | Windows | |
+| [wavpack](https://www.wavpack.com/downloads.html) | Windows | 5.9.0 |
+| [wvgain](https://www.wavpack.com/downloads.html) | Windows | 5.9.0 |
+| [wvtag](https://www.wavpack.com/downloads.html) | Windows | 5.9.0 |
+| [wvunpack](https://www.wavpack.com/downloads.html) | Windows | 5.9.0 |
+| [fx](https://fx.wtf) | Windows | 39.2.0 |
