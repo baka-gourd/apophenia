@@ -67,6 +67,13 @@ fn parse_shell_name(value: &str) -> Option<Shell> {
 }
 
 pub fn detect_installations(versions: &[InstallVersion]) -> Result<InstallReport> {
+    detect_installations_with_options(versions, false)
+}
+
+pub fn detect_installations_with_options(
+    versions: &[InstallVersion],
+    ignore_version: bool,
+) -> Result<InstallReport> {
     let platform = current_platform();
     let mut grouped: BTreeMap<&str, Vec<&InstallVersion>> = BTreeMap::new();
     for version in versions {
@@ -120,6 +127,16 @@ pub fn detect_installations(versions: &[InstallVersion]) -> Result<InstallReport
                     "{}:{}: `{}` is a shell builtin and cannot be version-probed",
                     version.application_name, version.internal_version, version.binary_name
                 ));
+                continue;
+            }
+            if ignore_version {
+                let specificity = version
+                    .rules
+                    .iter()
+                    .map(|rule| rule.specificity)
+                    .max()
+                    .unwrap_or_default();
+                matches.push((version, specificity));
                 continue;
             }
             match probe_version(version, &availability) {
@@ -724,7 +741,9 @@ fn powershell_quote(value: &str) -> String {
 
 #[cfg(test)]
 mod tests {
-    use super::{Shell, completion_registration, detect_installations};
+    use super::{
+        Shell, completion_registration, detect_installations, detect_installations_with_options,
+    };
     use crate::database::{InstallVersion, SupportRule};
 
     #[test]
@@ -817,6 +836,21 @@ mod tests {
                 .iter()
                 .any(|reason| reason.contains("missing"))
         );
+    }
+
+    #[test]
+    fn can_ignore_version_checks_for_an_installed_command() {
+        let executable = std::env::current_exe()
+            .expect("test executable")
+            .to_string_lossy()
+            .into_owned();
+        let version = test_version("alpha", "1", &executable);
+
+        let report = detect_installations_with_options(&[version], true).unwrap();
+
+        assert_eq!(report.matches.len(), 1);
+        assert_eq!(report.matches[0].application_name, "alpha");
+        assert_eq!(report.matches[0].internal_version, "1");
     }
 
     fn test_version(

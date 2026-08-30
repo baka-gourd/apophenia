@@ -8,7 +8,9 @@ use apophenia::builder::build_database;
 use apophenia::config::{load as load_config, write_output};
 use apophenia::database::{Database, database_path_from_env_or_default};
 use apophenia::download::{DEFAULT_DATABASE_URL, download_database};
-use apophenia::install::{Shell, completion_registration, detect_installations, detect_shell};
+use apophenia::install::{
+    Shell, completion_registration, detect_installations_with_options, detect_shell,
+};
 use apophenia::paths::app_paths;
 use apophenia::runtime::build_command;
 use apophenia::version::parse_app_selector;
@@ -37,9 +39,13 @@ fn main() -> Result<()> {
                 stats.candidates
             );
         }
-        Some(Command::Install { shell, database }) => {
+        Some(Command::Install {
+            shell,
+            database,
+            ignore_version,
+        }) => {
             let runtime = tokio::runtime::Runtime::new()?;
-            runtime.block_on(install(shell, database))?;
+            runtime.block_on(install(shell, database, ignore_version))?;
         }
         Some(Command::Download { output }) => {
             let runtime = tokio::runtime::Runtime::new()?;
@@ -88,7 +94,11 @@ fn load_command_from_environment() -> Result<clap::Command> {
     build_command(&bundle)
 }
 
-async fn install(shell: Option<Shell>, database: Option<PathBuf>) -> Result<()> {
+async fn install(
+    shell: Option<Shell>,
+    database: Option<PathBuf>,
+    ignore_version: bool,
+) -> Result<()> {
     let paths = app_paths()?;
     let config = load_config(&paths.config)?;
     let default_database = if Path::new("dist/apophenia.db").exists() {
@@ -99,7 +109,7 @@ async fn install(shell: Option<Shell>, database: Option<PathBuf>) -> Result<()> 
     let database_path = database_path_from_env_or_default(database.unwrap_or(default_database));
     let database = Database::open(&database_path, true).await?;
     let versions = database.list_all_install_versions().await?;
-    let report = detect_installations(&versions)?;
+    let report = detect_installations_with_options(&versions, ignore_version)?;
     for skipped in &report.skipped {
         eprintln!("apophenia install: skipped {skipped}");
     }
@@ -192,6 +202,12 @@ enum Command {
         shell: Option<Shell>,
         #[arg(long)]
         database: Option<PathBuf>,
+        #[arg(
+            long,
+            visible_alias = "ignore-version-mismatch",
+            help = "Install even when the detected target version is unsupported"
+        )]
+        ignore_version: bool,
     },
     /// Download the published completion database.
     Download {

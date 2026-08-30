@@ -15,6 +15,10 @@ cargo build --release
 1. Run `apophenia download` to download database.
 2. Use `apophenia install` to enable command completion for your shell.
 
+Use `apophenia install --ignore-version` (also available as
+`--ignore-version-mismatch`) to install a completion when the target command's
+version is not listed as supported.
+
 ### File location and Config
 
 Apophenia stores its configuration and database files in the following locations:
