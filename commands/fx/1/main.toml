@@ -1,0 +1,95 @@
+schema_version = 1
+
+[command]
+name = "fx"
+binary = "fx"
+description = "Terminal JSON viewer"
+supported_versions = ["39.2.0"]
+version_commands = [["--version"]]
+disable_help_flag = true
+
+[[command.version_preprocessors]]
+engine = "regex"
+pattern = "(?s)^(?P<version>[0-9]+[.][0-9]+[.][0-9]+).*$"
+replace = "$version"
+
+[[command.options]]
+id = "help"
+names = ["-h", "--help"]
+action = "help"
+help = "Print help."
+
+[[command.options]]
+id = "version"
+names = ["-v", "--version"]
+action = "flag"
+help = "Print version."
+
+[[command.options]]
+id = "themes"
+names = ["--themes"]
+action = "flag"
+help = "Print themes."
+
+[[command.options]]
+id = "completion"
+names = ["--comp"]
+action = "value"
+value_name = "SHELL"
+possible_values = ["bash", "zsh", "fish"]
+help = "Print the completion script for a shell."
+
+[[command.options]]
+id = "raw"
+names = ["-r", "--raw"]
+action = "flag"
+help = "Treat input as a raw string."
+
+[[command.options]]
+id = "slurp"
+names = ["-s", "--slurp"]
+action = "flag"
+help = "Read all inputs into an array."
+
+[[command.options]]
+id = "yaml"
+names = ["--yaml"]
+action = "flag"
+help = "Parse input as YAML."
+
+[[command.options]]
+id = "toml"
+names = ["--toml"]
+action = "flag"
+help = "Parse input as TOML."
+
+[[command.options]]
+id = "strict"
+names = ["--strict"]
+action = "flag"
+help = "Use strict mode."
+
+[[command.options]]
+id = "no_inline"
+names = ["--no-inline"]
+action = "flag"
+help = "Disable inlining in output."
+
+[[command.options]]
+id = "game_of_life"
+names = ["--game-of-life"]
+action = "flag"
+help = "Play the game of life."
+
+[[command.arguments]]
+id = "input"
+position = 1
+value_name = "FILE"
+value_hint = "file_path"
+help = "JSON input file; read from stdin when omitted."
+
+[[command.arguments]]
+id = "query"
+position = 2
+value_name = "QUERY"
+help = "Field or path to inspect."
