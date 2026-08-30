@@ -55,12 +55,59 @@ jobs:
         include:
           - runner: ubuntu-latest
             target: x86_64-unknown-linux-gnu
+            builder: cargo
             binary: apophenia
             asset: apophenia-linux-x86_64
+          - runner: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            builder: cross
+            binary: apophenia
+            asset: apophenia-linux-aarch64
+          - runner: ubuntu-latest
+            target: i686-unknown-linux-gnu
+            builder: cross
+            binary: apophenia
+            asset: apophenia-linux-i686
+          - runner: ubuntu-latest
+            target: armv7-unknown-linux-gnueabihf
+            builder: cross
+            binary: apophenia
+            asset: apophenia-linux-armv7
           - runner: windows-latest
             target: x86_64-pc-windows-msvc
+            builder: cargo
             binary: apophenia.exe
             asset: apophenia-windows-x86_64.exe
+          - runner: windows-latest
+            target: aarch64-pc-windows-msvc
+            builder: cargo
+            binary: apophenia.exe
+            asset: apophenia-windows-aarch64.exe
+          - runner: windows-latest
+            target: i686-pc-windows-msvc
+            builder: cargo
+            binary: apophenia.exe
+            asset: apophenia-windows-i686-msvc.exe
+          - runner: ubuntu-latest
+            target: x86_64-pc-windows-gnu
+            builder: cross
+            binary: apophenia.exe
+            asset: apophenia-windows-x86_64-gnu.exe
+          - runner: ubuntu-latest
+            target: i686-pc-windows-gnu
+            builder: cross
+            binary: apophenia.exe
+            asset: apophenia-windows-i686-gnu.exe
+          - runner: macos-15-intel
+            target: x86_64-apple-darwin
+            builder: cargo
+            binary: apophenia
+            asset: apophenia-macos-x86_64
+          - runner: macos-latest
+            target: aarch64-apple-darwin
+            builder: cargo
+            binary: apophenia
+            asset: apophenia-macos-aarch64
     steps:
       - name: Check out tagged source
         uses: actions/checkout@v4
@@ -70,8 +117,19 @@ jobs:
         with:
           targets: ${{ matrix.target }}
 
-      - name: Build binary
+      - name: Install cross
+        if: matrix.builder == 'cross'
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cross
+
+      - name: Build binary with Cargo
+        if: matrix.builder == 'cargo'
         run: cargo build --locked --release --target "${{ matrix.target }}"
+
+      - name: Build binary with cross
+        if: matrix.builder == 'cross'
+        run: cross build --locked --release --target "${{ matrix.target }}"
 
       - name: Stage binary
         shell: bash
